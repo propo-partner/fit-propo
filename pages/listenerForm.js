@@ -4,7 +4,7 @@ import styles from '../styles/common.module.css'
 import React, { useState } from 'react'
 import { useForm } from "react-hook-form";
 
-export default function listenerForm () {
+export default function ListenerForm () {
   const {
     register,
     handleSubmit,

@@ -18,7 +18,7 @@ export default function SignupComplete () {
           </a>
 				</div>
         <p className={`${styles.c_text} ${styles.mb80}`}>
-        メールが届かない方は、迷惑メールなどに振り分けられていないかをご確認の上、<a className={styles.c_textlink} href="https://propo.fm/" target="_blank">お問い合わせ</a>ください。
+        メールが届かない方は、迷惑メールなどに振り分けられていないかをご確認の上、<a className={styles.c_textlink} href="https://propo.fm/" target="_blank" rel="noopener noreferrer">お問い合わせ</a>ください。
         </p>
       </section>
       <section className={styles.c_greybox}>
