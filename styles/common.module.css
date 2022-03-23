@@ -1,0 +1,164 @@
+/* signupComplete */
+.c_greybox {
+  padding: 40px 16px;
+  background: #f6f6f6;
+}
+
+.c_title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.c_title_small {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.c_text {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.c_textlink {
+  font-size: 14px;
+  color: #0d958e;
+  text-decoration: underline;
+  transition: opacity 0.4s;
+}
+
+.c_underlogo_text {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.c_img_logo {
+  width: 200px;
+}
+
+.c_sec_grey {
+  width: 100vw;
+  transform: translateX(-16px);
+  background: #f6f6f6;
+  padding: 40px 16px;
+}
+
+.c_form_area {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.c_input_wrap {
+  flex: 1;
+  height: 46px;
+  font-size: 1.4rem;
+  color: #333;
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 2px 6px 0 rgb(0 0 0 / 30%);
+}
+
+.c_input_text {
+  display: inline-block;
+  width: 100%;
+  height: 46px;
+  font-size: 14px;
+  color: #333;
+  padding-left: 20px;
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 2px 6px 0 rgb(0 0 0 / 30%);
+}
+
+.c_submit_wrap {
+  display: inline-block;
+  position: relative;
+  width: 46px;
+  height: 46px;
+  background: url(/images/ico_mail.svg) no-repeat;
+  background-size: 17px 14px;
+  background-position: 50%;
+  background-color: #0d958e;
+  box-shadow: 0 2px 6px 0 rgb(0 0 0 / 30%);
+  transition: .4s;
+  vertical-align: top;
+  margin-left: 5px;
+}
+
+.c_submit_btn {
+  display: inline-block;
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border: none;
+  text-align: center;
+  opacity: 0;
+}
+
+.roundBtn {
+  width: fit-content;
+  height: 44px;
+  border-radius: 28px;
+  text-align: center;
+  letter-spacing: 1px;
+  background: #0d958e;
+  box-shadow: 0 2px 6px 0 rgb(0 0 0 / 30%);
+  margin: 0 auto;
+  transition: .4s;
+  padding: 0 40px;
+}
+
+.roundBtn a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  margin: 0 auto;
+  vertical-align: middle;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.roundBtn a .ico_right {
+  margin-left: 6px;
+}
+
+/* form style */
+.c_error_text {
+  font-size: 11px;
+  color: red;
+  padding: 10px 0;
+}
+
+/* margin style */
+.mb10 {
+  margin-bottom: 10px;
+}
+
+.mb20 {
+  margin-bottom: 20px;
+}
+
+.mb24 {
+  margin-bottom: 24px;
+}
+
+.mb30 {
+  margin-bottom: 30px;
+}
+
+.mb80 {
+  margin-bottom: 80px;
+}
+
+@media (min-width: 1024px) {
+  .c_textlink:hover {
+    opacity: 0.7;
+  }
+}
