@@ -3,9 +3,8 @@ import Layout from '../component/Layout'
 import styles from '../styles/common.module.css'
 import React, { useState } from 'react'
 import { useForm } from "react-hook-form";
-import CommonBox3 from "../component/commonBox3";
 
-export default function ListenerForm () {
+export default function CommonForm () {
   const {
     register,
     handleSubmit,
@@ -38,7 +37,7 @@ export default function ListenerForm () {
 
   return (
     <Layout>
-      <div className={styles.c_formSec}>
+      <section className={styles.c_sec_grey}>
         <p className={`${styles.c_title_small} ${styles.mb20}`}>
         新しいお気に入りの番組を、<br />簡単に見つけよう。
         </p>
@@ -63,8 +62,8 @@ export default function ListenerForm () {
         番組を配信している方は、<a className={styles.c_textlink} href="">こちら</a>をご覧ください。<br />
         <a className={styles.c_textlink} href="">プライバシーポリシー</a>
         </p>
-      </div>
-      <CommonBox3 />
+      </section>
+
     </Layout>
   )
 }

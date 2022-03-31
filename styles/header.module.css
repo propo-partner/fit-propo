@@ -9,8 +9,12 @@
 }
 
 .header {
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: calc(100% - 32px);
   height: 64px;
+  margin: 0 auto;
   z-index: 2;
 }
 
@@ -22,11 +26,21 @@
 }
 
 .header__brand img {
-  width: 140px;
+  width: 157px;
+}
+
+.header__nav {
+  display: none;
 }
 
 @media (min-width: 861px) {
   .header_bgWrap {
     background-position: calc(50% - 606px) -80px, calc(50% - 270px) 40px, calc(50% + 610px) -80px;
+  }
+
+  .header {
+    width: 100%;
+    max-width: 1024px;
+
   }
 }
