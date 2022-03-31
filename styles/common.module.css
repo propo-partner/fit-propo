@@ -334,6 +334,10 @@
   padding-bottom: 24px;
 }
 
+.bborder {
+  border-bottom: 1px solid #dfdfdf;
+}
+
 .align_center {
   text-align: center;
 }
@@ -378,7 +382,6 @@
 
 /* listenerTopicResister */
 .listener_topic_input {
-  border-bottom: 1px solid #dfdfdf;
   margin-bottom: 24px;
 }
 
