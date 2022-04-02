@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Layout from '../component/Layout'
+import Layout from '../components/Layout'
 
 export default function Home() {
   return (
@@ -13,8 +13,16 @@ export default function Home() {
       <br />
       <br />
       <div>
-        <Link href="/listenerForm">
-          <a>メールアドレス入力画面へ(メニューからの遷移時)</a>
+        <Link href="/signup">
+          <a>A-0_メニューからの遷移時</a>
+        </Link>
+      </div>
+      <br />
+      <br />
+      <br />
+      <div>
+        <Link href="/setting/input">
+          <a>A-3_リスナー登録-入力ページ</a>
         </Link>
       </div>
     </Layout>

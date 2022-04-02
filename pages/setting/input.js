@@ -1,13 +1,13 @@
 import React, { useRef } from "react"
 import { useRouter } from "next/router";
 import Link from 'next/link'
-import CommonBox3 from '../component/commonBox3'
-import Layout from '../component/Layout'
-import styles from '../styles/common.module.css'
+import CommonBox3 from '../../components/commonBox3'
+import Layout from '../../components/Layout'
+import styles from '../../styles/common.module.css'
 import { useForm } from "react-hook-form";
 
 
-export default function ListenerTopicForm () {
+export default function ListenerInput () {
   const {
     register,
     handleSubmit,
@@ -55,7 +55,7 @@ export default function ListenerTopicForm () {
     console.log(result.status);
 
     if (result.status === 'success') {
-      router.push("/topicComplete")
+      router.push("/setting/complete")
     }
   }
 

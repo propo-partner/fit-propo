@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
-import Layout from '../component/Layout'
+import Layout from '../components/Layout'
 import styles from '../styles/common.module.css'
 import React, { useState } from 'react'
 import { useForm } from "react-hook-form";
-import CommonBox3 from "../component/commonBox3";
+import CommonBox3 from "../components/commonBox3";
 
-export default function ListenerForm () {
+export default function SignUp () {
   const {
     register,
     handleSubmit,
@@ -30,7 +30,7 @@ export default function ListenerForm () {
     console.log(result.status);
 
     if (result.status === 'success') {
-      router.push("/signupComplete")
+      router.push("/confirm")
     }
 
   }
