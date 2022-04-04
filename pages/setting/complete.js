@@ -7,7 +7,7 @@ export default function TopicComplete () {
   return (
     <Layout>
       <section>
-        <h2 className={styles.c_title}>あなたの興味を登録しました。</h2>
+        <h2 className={`${styles.c_title_center} ${styles.mb12}`}>あなたの興味を登録しました。</h2>
         <p className={`${styles.c_text} ${styles.mb24} ${styles.align_center_pc}`}>
         最初のおすすめエピソードをお届けしますので、登録いただいたメールの受信ボックスをご確認ください。
         </p>

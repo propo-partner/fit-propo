@@ -50,6 +50,9 @@ select::-ms-expand {
   display: none;
 }
 
+img {
+  width: 100%;
+}
 
 * {
   box-sizing: border-box;
@@ -66,6 +69,11 @@ select::-ms-expand {
 .row {
   width: 91.466%;
 }
+
+.font_en {
+  font-family: "Montserrat"; }
+
+
 
 @media (min-width: 768px) {
   .main {

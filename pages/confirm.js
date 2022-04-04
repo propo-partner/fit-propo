@@ -8,7 +8,7 @@ export default function Confirm () {
   return (
     <Layout>
       <section>
-        <h2 className={styles.c_title}>受信ボックスをご確認ください</h2>
+        <h2 className={`${styles.c_title_center} ${styles.mb12}`}>受信ボックスをご確認ください</h2>
         <p className={`${styles.c_text} ${styles.mb24} ${styles.align_center_pc}`}>
         メール登録いただき、ありがとうございました。<br></br>
         ご登録のメールアドレスへ、登録完了メールをお届けしますので、受信ボックスをご確認ください。
@@ -24,7 +24,6 @@ export default function Confirm () {
         </p>
       </section>
       <CommonBox3 />
-      <CommonBox4 />
     </Layout>
   )
 }
