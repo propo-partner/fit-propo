@@ -1,9 +1,40 @@
+import Link from 'next/link'
 import Layout from '../../components/Layout'
 import styles from '../../styles/common.module.css'
 import CommonBox4 from "../../components/commonBox4";
+import React, { useContext, useEffect } from 'react'
+import { DataContext } from '../../components/DataProvider';
+import { AudioPlayer } from '../../components/AudioPlayer';
 
 export default function EpisodePlay () {
 
+  // episode info only
+  const url = 'https://api.json-generator.com/templates/5g-ILyuHM4AL/data?access_token=6a76lvuqp3cwnx944w7p5w2e1mv7v7puos3rn15p'
+
+  // program + episode info
+  // const url = 'https://api.json-generator.com/templates/QgSAkpfZNNRi/data?access_token=6a76lvuqp3cwnx944w7p5w2e1mv7v7puos3rn15p'
+  
+  const { track, setTrack, isPlay, setIsPlay, trackIndex, setTrackIndex, episode, setEpisode,  } = useContext(DataContext)
+
+  useEffect(() => {
+    (async() => {
+      const respons = await fetch(url)
+      const data = await respons.json()
+      // setEpisode(data)
+      setTrack(data)
+    })()
+  }, [])
+
+  // const { apple } = useContext(DataContext);
+  // console.log('episode', episode);
+  console.log('title', track.title);
+  console.log('track', track);
+
+  // useEffect(() => {
+  //   fetch(url)
+  //     .then(res=> res.json())
+  //     .then(res=> setEpisode(res))
+  // }, [])
 
   return (
     <Layout>
@@ -13,7 +44,7 @@ export default function EpisodePlay () {
             <img src="/images/thumbnail_rect01.png" alt="" />
           </div>
           <div className={`${styles.c_roundBtn} ${styles.mb24} ${styles.align_center_pc}`}>
-            <a href="https://propo.fm/" className={styles.topChannel__btn__link}>
+            <a href="https://propo.fm/" className={styles.c_roundBtn_inner}>
               <span>エピソードを聴く</span>
               <img className={styles.ico_right} src="/images/ico_play.svg" />
             </a>
@@ -23,9 +54,9 @@ export default function EpisodePlay () {
             <div className={`${styles.timeber} ${styles.mb16}`}>
             エピソードプレイバーが入ります
             </div>
-            <h2 className={`${styles.c_title} ${styles.mb12} ${styles.episode_title}`}>0547_史記の物語。韓信は位人臣を極め、故郷に錦も飾ったけど非業の最期を遂げたのだ！（涙）</h2>
+            <h2 className={`${styles.c_title} ${styles.mb12} ${styles.episode_title}`}>{track.title}</h2>
             <p className={`${styles.c_text_grey} ${styles.mb8} ${styles.program_title}`}>ラジレキ - ラジオ歴史小話</p>
-            <p className={styles.c_text_grey12}>2021.08.20</p>
+            <p className={styles.c_text_grey12}>{track.date}</p>
           </div>
         </div>
         <div className={`${styles.c_greybox} ${styles.c_question_box} ${styles.mb40}`}>
@@ -35,15 +66,18 @@ export default function EpisodePlay () {
           </p>
           <div className={styles.c_flex_wrap_center}>
             <div className={`${styles.c_roundBtn_white}`}>
-            <a href="https://propo.fm/" className={styles.topChannel__btn__link}>
-              <span>イマイチ...</span>
-            </a>
-          </div>
-          <div className={`${styles.c_roundBtn}`}>
-              <a href="https://propo.fm/" className={styles.topChannel__btn__link}>
-                <span>スキ！</span>
-              </a>
-              <input className={styles.c_submit_btn_hidden} type="submit" value="" />
+              <Link href="/episode/radiohistory/unlike">
+                <a className={styles.c_roundBtn_inner}>
+                  <span>イマイチ...</span>
+                </a>
+              </Link>
+            </div>
+            <div className={`${styles.c_roundBtn}`}>
+              <Link href="/episode/radiohistory/like">
+                <a className={styles.c_roundBtn_inner}>
+                  <span>スキ！</span>
+                </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -79,6 +113,7 @@ export default function EpisodePlay () {
       </section>
 
       <CommonBox4 />
+      <AudioPlayer />
     </Layout>
   )
 }

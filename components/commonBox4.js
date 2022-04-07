@@ -16,7 +16,7 @@ export default function CommonBox4 () {
         </div>
         <div className={styles.c_brandbox_lower}>
           <div className={`${styles.c_roundBtn_white} ${styles.mb12}`}>
-            <a href="https://propo.fm/" className={styles.topChannel__btn__link}>
+            <a href="https://propo.fm/" className={styles.c_roundBtn_inner}>
               <span>ログアウトする</span>
               <img className={styles.ico_right} src="/images/ico_logout.svg"></img>
             </a>

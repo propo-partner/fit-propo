@@ -74,7 +74,7 @@ export default function ListenerInput () {
             { topicLists.map((item, index) => {
               index = index + 1
               return (
-                <div className={styles.c_check_wrap} key={`key_${index}`}>
+                <div className={styles.c_check_wrap_50_25} key={`key_${index}`}>
                 <label className={styles.c_label_check}>
                   <input 
                     {...register("favoriteTopics[]", {})}
@@ -135,7 +135,7 @@ export default function ListenerInput () {
             </div>
 
             <div className={`${styles.c_roundBtn} ${styles.mb24} ${styles.align_center_pc}`}>
-              <a href="https://propo.fm/" className={styles.topChannel__btn__link}>
+              <a href="https://propo.fm/" className={styles.c_roundBtn_inner}>
                 <span>この内容を保存する</span>
                 <img className={styles.ico_right} src="/images/ico_check.svg" />
               </a>

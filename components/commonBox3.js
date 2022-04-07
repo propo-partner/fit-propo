@@ -17,7 +17,7 @@ export default function CommonBox3 () {
         <div className={styles.c_brandbox_lower}>
           <p className={`${styles.c_title_16} ${styles.mb12} ${styles.align_center}`}>ポッドキャスト番組を配信している方へ</p>
           <div className={`${styles.c_roundBtn_white} ${styles.mb12}`}>
-            <a href="https://propo.fm/" className={styles.topChannel__btn__link}>
+            <a href="https://propo.fm/" className={styles.c_roundBtn_inner}>
               <span>PROPO.FM に番組登録する</span>
             </a>
           </div>

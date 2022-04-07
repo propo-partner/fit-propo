@@ -14,7 +14,7 @@ export default function Confirm () {
         ご登録のメールアドレスへ、登録完了メールをお届けしますので、受信ボックスをご確認ください。
         </p>
         <div className={`${styles.c_roundBtn} ${styles.mb24}`}>
-					<a href="https://propo.fm/" className={styles.topChannel__btn__link}>
+					<a href="https://propo.fm/" className={styles.c_roundBtn_inner}>
             <span>トップページに戻る</span>
             <img className={styles.ico_right} src="/images/ico_back.svg" />
           </a>
