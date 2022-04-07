@@ -14,8 +14,8 @@ export default function ListenerInput () {
     watch,
     getValues,
     formState: { errors },
-    // defaultValues
-  } = useForm();
+    defaultValues
+  } = useForm({mode: "onChange"});
 
   const router = useRouter();
 
@@ -52,11 +52,17 @@ export default function ListenerInput () {
     }
   }
 
+  // const change = (e) => {
+  //   console.log(e.target)
+  // }
+
 
   return (
     <Layout>
       <section className={`${styles.unsubcribe_input} ${styles.mb80}`}>
-        <h2 className={`${styles.c_title_center} ${styles.mb12}`}>メール配信を停止しました。</h2>
+        <h2 className={`${styles.c_title_center} ${styles.mb12}`} onClick={() => {
+          alert('click')
+        }}>メール配信を停止しました。</h2>
         <p className={`${styles.c_text} ${styles.mb24} ${styles.align_center_pc}`}>
           もしよろしければ、配信停止された理由を教えてください（複数選択可）。
         </p>
@@ -69,15 +75,20 @@ export default function ListenerInput () {
               return (
                 <div className={styles.c_check_wrap_100} key={`key_${index}`}>
                 <label className={styles.c_label_check}>
-                  <input 
-                    {...register("unsubscribeReason[]", {})}
+                  <input
+                    {...register("test", {
+                      onChange: (e) => {
+                        console.log(e)
+                      }
+                    })}
+                    defaultChecked={"メール配信内容が好みに合わなかった".includes(item.reason)}
                     id={item.id}
                     type="checkbox"
                     value={item.reason}
-                    name="unsubscribeReason[]"
+                    // name="unsubscribeReason[]"
                     className={styles.c_input_check} 
                     // checked="checked"
-                    checked={(item.checked ? "checked" : '')}
+                    // checked={(item.checked ? "checked" : '')}
                     />
                     {item.reason}
                 </label>
