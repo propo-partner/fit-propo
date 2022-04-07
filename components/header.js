@@ -287,7 +287,7 @@ export default function Header () {
 							</div>
 						</div>
 						<div className={`${styles.drwNav__wrap__menu} ${styles.drw_sns}`}>
-							<a className={styles.drwNav__wrap__menu__fb} href="https://www.facebook.com/propo.fm/" target="_blank">
+							<a className={styles.drwNav__wrap__menu__fb} href="https://www.facebook.com/propo.fm/" target="_blank" rel="noopener noreferrer">
 								<svg className={styles.ico_fb} viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg">
 									<g transform="translate(-608.000000, -339.000000)">
 										<path
@@ -297,7 +297,7 @@ export default function Header () {
 								</svg>
 								{/* <!--<img src="image/facebook.png" alt="facebook">--> */}
 							</a>
-							<a className={styles.drwNav__wrap__menu__twitter} href="https://twitter.com/PROPOFM" target="_blank">
+							<a className={styles.drwNav__wrap__menu__twitter} href="https://twitter.com/PROPOFM" target="_blank" rel="noopener noreferrer">
 								{/* <i className={fab fa-twitter"></i> */}
 							</a>
 						</div>
