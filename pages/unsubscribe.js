@@ -19,11 +19,18 @@ export default function ListenerInput () {
 
   const router = useRouter();
 
+  // const reasonLists = [
+  //   "メール配信内容が好みに合わなかった",
+  //   "面白いエピソードが出会えなかった",
+  //   "メール配信頻度が多い",
+  //   "その他",
+  // ]
+
   const reasonLists = [
-    "メール配信内容が好みに合わなかった",
-    "面白いエピソードが出会えなかった",
-    "メール配信頻度が多い",
-    "その他",
+    {id: "reason1", reason: "メール配信内容が好みに合わなかった", checked: true},
+    {id: "reason2", reason: "面白いエピソードが出会えなかった", checked: false},
+    {id: "reason3", reason: "メール配信頻度が多い", checked: false},
+    {id: "reason4", reason: "その他", chaeked: false},
   ]
 
   const onSubmit = async (data) => {
@@ -64,13 +71,15 @@ export default function ListenerInput () {
                 <label className={styles.c_label_check}>
                   <input 
                     {...register("unsubscribeReason[]", {})}
-                    id="reason"
+                    id={item.id}
                     type="checkbox"
-                    value={item}
+                    value={item.reason}
                     name="unsubscribeReason[]"
                     className={styles.c_input_check} 
+                    // checked="checked"
+                    checked={(item.checked ? "checked" : '')}
                     />
-                    {item}
+                    {item.reason}
                 </label>
               </div>
               )
