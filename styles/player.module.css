@@ -1,0 +1,366 @@
+/* Audio Player */
+#app {
+	display: flex;
+  position: fixed;
+  right: 40px;
+  bottom: 0;
+	width: 100%;
+	margin-bottom: 16px;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.12);
+	padding: 8px 16px 12px;
+  background: #ffffff;
+}
+
+#audio_thumb {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	vertical-align: middle;
+	border: 1px solid #eaeaea;
+  margin-right: 8px;
+}
+
+.ep_img {
+	width: 100%;
+	height: auto;
+  border: 1px solid #eaeaea;
+}
+
+.play_btn_wrap {
+	position: absolute;
+  width: 24px;
+  height: 24px;
+  bottom: -34px;
+  left: calc(50% - 12.5px);
+	margin: auto;
+  cursor: pointer;
+}
+
+#play_ico,
+#pause_ico {
+	position: absolute;
+  top: 0;
+  left: 0;
+	font-size: 25px;
+	color: #0d958e;
+	z-index: 5;
+}
+
+#pause_ico {
+	display: none;
+}
+
+#audio_desc {
+	flex: 1;
+	float: right;
+	vertical-align: middle;
+}
+
+.audio_desc_upper {
+  display: flex;
+  align-items: center;
+	margin-bottom: 3px;
+}
+
+.ep-programName {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+	position: relative;
+  flex: 1;
+	font-size: 11px;
+	line-height: 1.4;
+	margin-right: 10px;
+}
+
+.ep-programName span {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.ep-date {
+  font-size: 11px;
+  font-family: 'Montserrat';
+}
+
+.ep-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 1.4;
+	overflow: hidden;
+	margin-bottom: 6px;
+}
+
+#timebar {
+	width: 100%;
+	height: 12px;
+	background-color: lightgray;
+	margin: 3px 0 5px;
+	border-radius: 6px;
+}
+
+.time_ctl_wrap {
+	display: flex;
+  align-items: center;
+	justify-content: space-between;
+}
+#timebar-num {
+	position: relative;
+	bottom: 0;
+	font-size: 9px;
+	color: #fff;
+}
+
+#time_disp {
+	font-size: 11px;
+	color: #0a0a0a;
+	/*margin-right: 108px;*/
+}
+
+#timebar-past {
+	width: 0;
+	height: 12px;
+	vertical-align: bottom;
+	background-color: #0d958e;
+	text-align: center;
+	border-radius: 6px;
+}
+
+#playback {
+	cursor: pointer;
+	margin-right: 20px;
+}
+
+#skip {
+	cursor: pointer;
+	margin-right: 20px;
+}
+
+#speed_ctrl {
+	cursor: pointer;
+	font-size: 11px;
+	color: #0a0a0a;
+}
+
+#time_disp,
+#playback,
+#skip,
+#speed_ctrl {
+	width: 14px;
+	vertical-align: baseline;
+}
+
+.play_btn_wrap:hover,
+#speed_ctrl:hover {
+	opacity: .6;
+	transition: .4s;
+}
+
+.fa,
+.fas {
+	font-size: 20px;
+}
+
+.time_control_area {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+	margin: 0 10px 0 0;
+}
+
+@media only screen and ( max-width: 768px ) {
+	#audio_thumb:hover,
+	#speed_ctrl:hover {
+		opacity: 1;
+	}
+}
+
+
+@media only screen and ( max-width: 666px ) {
+	#app {
+		height: 110px;
+	}
+
+	#audio_thumb {
+		width: 80px;
+		margin: 15px 0 0 15px;
+	}
+
+	#audio_desc {
+		width: calc(100% - 115px);
+	}
+
+	.ep-date {
+		font-size: 10px;
+		line-height: 1.7;
+		margin-bottom: 5px;
+	}
+
+	.ep-title {
+		font-size: 11px;
+		line-height: 1.4;
+		height: 30.8px;
+	}
+	
+	#timebar {
+		margin: 0 0 -5px;
+	}
+
+	#time_disp,
+	#speed_ctrl {
+		font-size: 10px;
+		line-height: 1.5;
+	}
+
+/*#time_disp {
+		margin-right: 100px;
+	}*/
+
+	#playback,
+	#skip {
+		width: 14px;
+	}
+	
+	#skip {
+		margin-right: 10px;
+	}
+	
+	#play_ico,
+	#pause_ico {
+		font-size: 60px;
+		top: calc(50% - 32px);
+		right: calc(50% - 30px);
+	}
+}
+
+@media only screen and ( max-width: 384px ) {
+	/* #app {
+		height: 95px;
+	}
+
+	#audio_thumb {
+		width: 95px;
+	} */
+	
+	#audio_desc {
+		width: calc(100% - 115px);
+		padding: 15px 10px 0;
+	}
+	
+	.ep-date {
+		margin-bottom: 0;
+	}
+	
+	/*#time_disp {
+		margin-right: 80px;
+	}*/
+	
+	#playback {
+		margin-right: 10px;
+	}
+	
+	.sp-nodisp {
+		display: none;
+	}
+
+
+}
+
+@media only screen and ( max-width: 360px ) {
+	#playback {
+	margin-right: 5px;
+	}
+	
+	/*#time_disp {
+		margin-right: 50px;
+	}*/
+}
+
+/*@media only screen and ( max-width: 340px ) {
+	#time_disp {
+		margin-right: 30px;
+	}
+}*/
+
+@media only screen and ( max-width: 320px ) {
+	#app {
+		height: 80px;
+	}
+
+	#audio_thumb {
+		width: 70px;
+	}
+
+	#audio_desc {
+		width: calc(100% - 105px);
+	}
+
+	.ep-date {
+		font-size: 8px;
+	}
+
+	.ep-title {
+		font-size: 10px;
+		height: 24px;
+		line-height: 1.2;
+	}
+	
+	#timebar {
+		margin: 0 0 -10px;
+		height: 10px;
+	}
+
+	#time_disp,
+	#speed_ctrl {
+		font-size: 8px;
+	}
+
+	/*#time_disp {
+		margin-right: 5px;
+	}*/
+	
+	#timebar-num {
+		font-size: 8px;
+		bottom: 8px;
+	}
+	
+	#timebar-past {
+		height: 10px;
+	}
+	
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v126/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2) format('woff2');
+}
+
+
+@media (min-width: 768px) {
+  #app {
+    width: 375px;
+  }
+}

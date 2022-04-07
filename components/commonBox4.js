@@ -1,6 +1,6 @@
 import styles from '../styles/common.module.css'
 
-export default function CommonBox3 () {
+export default function CommonBox4 () {
   return (
     <>
       <section className={`${styles.c_greybox} ${styles.c_brandbox}`}>
@@ -15,15 +15,12 @@ export default function CommonBox3 () {
           </p>
         </div>
         <div className={styles.c_brandbox_lower}>
-          <p className={`${styles.c_title_16} ${styles.mb12} ${styles.align_center}`}>ポッドキャスト番組を配信している方へ</p>
           <div className={`${styles.c_roundBtn_white} ${styles.mb12}`}>
-            <a href="https://propo.fm/" className={styles.topChannel__btn__link}>
-              <span>PROPO.FM に番組登録する</span>
+            <a href="https://propo.fm/" className={styles.c_roundBtn_inner}>
+              <span>ログアウトする</span>
+              <img className={styles.ico_right} src="/images/ico_logout.svg"></img>
             </a>
           </div>
-          <p className={`${styles.c_text}  ${styles.align_center}`}>
-          PROPO.FM に登録済の方はこちらから<a className={styles.c_textlink} href="/login">ログイン</a>
-          </p>
         </div>
       </section>
     </>

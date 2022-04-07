@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import Layout from '../component/Layout'
+import Layout from '../components/Layout'
 import styles from '../styles/common.module.css'
 import React, { useState } from 'react'
 import { useForm } from "react-hook-form";
@@ -29,7 +29,7 @@ export default function CommonForm () {
     console.log(result.status);
 
     if (result.status === 'success') {
-      router.push("/signupComplete")
+      router.push("/confirm")
     }
 
   }

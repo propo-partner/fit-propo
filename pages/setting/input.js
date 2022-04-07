@@ -1,13 +1,13 @@
 import React, { useRef } from "react"
 import { useRouter } from "next/router";
 import Link from 'next/link'
-import CommonBox3 from '../component/commonBox3'
-import Layout from '../component/Layout'
-import styles from '../styles/common.module.css'
+import CommonBox3 from '../../components/commonBox3'
+import Layout from '../../components/Layout'
+import styles from '../../styles/common.module.css'
 import { useForm } from "react-hook-form";
 
 
-export default function ListenerTopicForm () {
+export default function ListenerInput () {
   const {
     register,
     handleSubmit,
@@ -55,7 +55,7 @@ export default function ListenerTopicForm () {
     console.log(result.status);
 
     if (result.status === 'success') {
-      router.push("/topicComplete")
+      router.push("/setting/complete")
     }
   }
 
@@ -63,7 +63,7 @@ export default function ListenerTopicForm () {
   return (
     <Layout>
       <section className={styles.listener_topic_input}>
-        <h2 className={styles.c_title}>トピックの登録</h2>
+        <h2 className={`${styles.c_title_center} ${styles.mb12}`}>トピックの登録</h2>
         <p className={`${styles.c_text} ${styles.mb24} ${styles.align_center_pc}`}>
         興味があるトピックを教えていただけると、よりお好みに近い内容をお届けすることができます。<br />
         ぜひご回答ください。
@@ -74,7 +74,7 @@ export default function ListenerTopicForm () {
             { topicLists.map((item, index) => {
               index = index + 1
               return (
-                <div className={styles.c_check_wrap} key={`key_${index}`}>
+                <div className={styles.c_check_wrap_50_25} key={`key_${index}`}>
                 <label className={styles.c_label_check}>
                   <input 
                     {...register("favoriteTopics[]", {})}
@@ -135,7 +135,7 @@ export default function ListenerTopicForm () {
             </div>
 
             <div className={`${styles.c_roundBtn} ${styles.mb24} ${styles.align_center_pc}`}>
-              <a href="https://propo.fm/" className={styles.topChannel__btn__link}>
+              <a href="https://propo.fm/" className={styles.c_roundBtn_inner}>
                 <span>この内容を保存する</span>
                 <img className={styles.ico_right} src="/images/ico_check.svg" />
               </a>
