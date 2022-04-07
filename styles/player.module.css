@@ -46,9 +46,9 @@
 	z-index: 5;
 }
 
-#pause_ico {
+/* #pause_ico {
 	display: none;
-}
+} */
 
 #audio_desc {
 	flex: 1;

@@ -113,7 +113,7 @@ export default function EpisodePlay () {
       </section>
 
       <CommonBox4 />
-      {/* <AudioPlayer /> */}
+      <AudioPlayer />
     </Layout>
   )
 }

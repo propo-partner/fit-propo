@@ -6,24 +6,24 @@ import episodeImg from "../public/images/thumbnail_rect01.png";
 
 
 export const AudioPlayer = () => {
-  // const { track } = props;
-  const { track } = useContext(DataContext);
-
-  
-  // const intervalRef = useRef(null);
-  
   // track
-  const { intervalRef, isPlay, setIsPlay } = useContext(DataContext);
+  const { track, intervalRef, isPlay, setIsPlay } = useContext(DataContext);
 
-  const { title, date, duration,  epiNum } = track;
+  const { title, date, duration,  epiNum, src } = track;
   // const thumbnail = episodeImg
+  console.log('src', track.src)
+  console.log(track)
+
+  const [audio, setAudio] = useState(null);
   
-  const trackSrc = track.src;
+  const musicRef = useRef(
+    // useEffect(() => {setAudio(new Audio("https://storage.googleapis.com/propo-apollo-stg.appspot.com/users/Jvmy7pwgJmbUYw0vWjNPklIQwO22/channels/FEPdlmxIDrgN6wYk0EK0/20210402_111648_593_radiohistory_ep0511_%E3%80%8C%E3%83%AB%E3%83%BC%E3%83%AB%E6%95%B4%E5%82%99%E3%81%8B%E3%82%99%E7%99%BA%E5%B1%95%E3%81%AE%E3%82%AB%E3%82%AD%E3%82%99%E3%80%8D%E3%82%AA%E3%82%B9%E3%83%9E%E3%83%B3%E5%B8%9D%E5%9B%BD%E3%82%B9%E3%83%AC%E3%82%A4%E3%83%9E%E3%83%B31%E4%B8%96%E3%81%A8%E3%82%A6%E3%82%A3%E3%83%BC%E3%83%B3%E5%8C%85%E5%9B%B2.mp3"))}, [])
+    useEffect(() => {setAudio(new Audio(track.src))}, [track.src])
+  );
+  console.log(musicRef)
 
-  const musicRef = useRef(new Audio(trackSrc));
-
-  const musicCurrentTime = musicRef.current.currentTime;
-  const musicRate = (Math.floor(musicCurrentTime / track.duration * 100));
+  // const musicCurrentTime = musicRef.current.currentTime;
+  // const musicRate = (Math.floor(musicCurrentTime / track.duration * 100));
  
   const [timePosition, setTimePosition] = useState(0); // time position
 
@@ -50,7 +50,7 @@ export const AudioPlayer = () => {
         console.log('nextTrack実行 ');
         nextTrack();
       } else {
-      setTimePosition(musicRef.current.currentTime);
+      // setTimePosition(musicRef.current.currentTime);
       // console.log(' 再生トラック/経過時間 ');
       // console.log('trackIndex ' + trackIndex + ' / ' + musicRef.current.currentTime);
       }
@@ -59,8 +59,8 @@ export const AudioPlayer = () => {
 
 
   useEffect(() => {
-    musicRef.current = new Audio(trackSrc);
-  }, [trackSrc]);
+    musicRef.current = audio;
+  }, [src]);
 
   useEffect(() => {
     if(isPlay) {
@@ -68,7 +68,7 @@ export const AudioPlayer = () => {
       start();
       console.log('track  start ');
     } else {
-      musicRef.current.pause();
+      // musicRef.current.pause();
       console.log('track  pause ');
       if (intervalRef.current === null) {
         return;
@@ -86,13 +86,13 @@ export const AudioPlayer = () => {
   const onClickTogglePlay = () => {
     if (isPlay) {
       setIsPlay(!isPlay);
-      const playingTrack = track[trackIndex];
-      playingTrack.playing = false;
+      // const playingTrack = track[trackIndex];
+      // playingTrack.playing = false;
       // console.log('isPlay change ' + isPlay);
     } else {
       setIsPlay(!isPlay);
-      const playingTrack = track[trackIndex];
-      playingTrack.playing = true;
+      // const playingTrack = track[trackIndex];
+      // playingTrack.playing = true;
 
       // console.log('!isPlay change ' + isPlay);
     }
@@ -101,13 +101,13 @@ export const AudioPlayer = () => {
   // prev 15s
   const onClickBack = () => {
     console.log("15s playback");
-    musicRef.current.currentTime -= 15;
+    // musicRef.current.currentTime -= 15;
   }
   
   // next 30s
   const onClickSkip = () => {
     console.log("30s playskip");
-    musicRef.current.currentTime += 30;
+    // musicRef.current.currentTime += 30;
   }
 
 
@@ -115,10 +115,10 @@ export const AudioPlayer = () => {
   const onClickTime = (e) => {
     timeBarWidth = e.target.getBoundingClientRect().width;
     timeBarX = e.nativeEvent.offsetX;
-    console.log('timeBarクリック: ' + timeBarX / timeBarWidth * track[trackIndex].duration + '');
+    // console.log('timeBarクリック: ' + timeBarX / timeBarWidth * track[trackIndex].duration + '');
     // console.log(e.target.getBoundingClientRect().width);
     // console.log(e.nativeEvent.offsetX);
-    musicRef.current.currentTime = (timeBarX / timeBarWidth * track[trackIndex].duration);
+    // musicRef.current.currentTime = (timeBarX / timeBarWidth * track[trackIndex].duration);
   }
 
   // speed change
@@ -167,13 +167,13 @@ export const AudioPlayer = () => {
       <div className={`${styles["ep-title"]}`}>
         {title}<span className={`${styles["sp-nodisp"]}`}></span>
       </div>
-      <div id={styles.timebar}>
+      {/* <div id={styles.timebar}>
         <div id={`${styles["timebar-bg"]}`} onClick={onClickTime} ref={timeBar}>
           <div id={`${styles["timebar-past"]}`} style={{width: musicRate + '%'}}>
             <div id={`${styles["timebar-num"]}`}>{musicRate + '%'}</div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className={styles.time_ctl_wrap}>
         <span id={styles.time_disp}>
         {musicTime(timePosition)}/
