@@ -18,11 +18,11 @@ export default function CommonBox3 () {
           <p className={`${styles.c_title_16} ${styles.mb12} ${styles.align_center}`}>ポッドキャスト番組を配信している方へ</p>
           <div className={`${styles.c_roundBtn_white} ${styles.mb12}`}>
             <a href="https://propo.fm/" className={styles.c_roundBtn_inner}>
-              <span>PROPO.FM に番組登録する</span>
+              <span>PROPO.FM Fit に番組登録する</span>
             </a>
           </div>
           <p className={`${styles.c_text}  ${styles.align_center}`}>
-          PROPO.FM に登録済の方はこちらから<a className={styles.c_textlink} href="/login">ログイン</a>
+          PROPO.FM Fit に登録済の配信者の方は<br className={styles.br_sp} />こちらから<a className={styles.c_textlink} href="/login">ログイン</a>
           </p>
         </div>
       </section>

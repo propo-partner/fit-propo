@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import CommonBox3 from '../../../components/commonBox3'
+import CommonBox4 from '../../../components/commonBox4'
 import Layout from '../../../components/Layout'
 import styles from '../../../styles/common.module.css'
 
@@ -13,13 +13,15 @@ export default function LikeUnlikeComplete () {
         参考にさせていただきます。
         </p>
         <div className={`${styles.c_roundBtn} ${styles.mb80} ${styles.align_center_pc}`}>
-					<a href="https://propo.fm/" className={styles.c_roundBtn_inner}>
-            <span>トップページに戻る</span>
-            <img className={styles.ico_right} src="/images/ico_back.svg" />
+          <Link href="/episode/radiohistory">
+					<a className={styles.c_roundBtn_inner}>
+            <span>再生ページに戻る</span>
+            <img className={`${styles.ico_right} ${styles.ico_back}`} src="/images/ico_back.svg" />
           </a>
+          </Link>
 				</div>
       </section>
-      <CommonBox3 />
+      <CommonBox4 />
     </Layout>
   )
 }

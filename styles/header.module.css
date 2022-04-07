@@ -45,6 +45,10 @@
 }
 
 @media screen and (max-width: 860px) {
+  .header {
+    justify-content: center;
+  }
+
   .header__nav {
     display: none; 
   }
