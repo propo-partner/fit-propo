@@ -17,8 +17,11 @@ export const AudioPlayer = () => {
   const [audio, setAudio] = useState(null);
   
   const musicRef = useRef(
-    // useEffect(() => {setAudio(new Audio("https://storage.googleapis.com/propo-apollo-stg.appspot.com/users/Jvmy7pwgJmbUYw0vWjNPklIQwO22/channels/FEPdlmxIDrgN6wYk0EK0/20210402_111648_593_radiohistory_ep0511_%E3%80%8C%E3%83%AB%E3%83%BC%E3%83%AB%E6%95%B4%E5%82%99%E3%81%8B%E3%82%99%E7%99%BA%E5%B1%95%E3%81%AE%E3%82%AB%E3%82%AD%E3%82%99%E3%80%8D%E3%82%AA%E3%82%B9%E3%83%9E%E3%83%B3%E5%B8%9D%E5%9B%BD%E3%82%B9%E3%83%AC%E3%82%A4%E3%83%9E%E3%83%B31%E4%B8%96%E3%81%A8%E3%82%A6%E3%82%A3%E3%83%BC%E3%83%B3%E5%8C%85%E5%9B%B2.mp3"))}, [])
-    useEffect(() => {setAudio(new Audio(track.src))}, [track.src])
+    useEffect(() => {setAudio(new Audio("https://storage.googleapis.com/propo-apollo-stg.appspot.com/users/Jvmy7pwgJmbUYw0vWjNPklIQwO22/channels/FEPdlmxIDrgN6wYk0EK0/20210402_111648_593_radiohistory_ep0511_%E3%80%8C%E3%83%AB%E3%83%BC%E3%83%AB%E6%95%B4%E5%82%99%E3%81%8B%E3%82%99%E7%99%BA%E5%B1%95%E3%81%AE%E3%82%AB%E3%82%AD%E3%82%99%E3%80%8D%E3%82%AA%E3%82%B9%E3%83%9E%E3%83%B3%E5%B8%9D%E5%9B%BD%E3%82%B9%E3%83%AC%E3%82%A4%E3%83%9E%E3%83%B31%E4%B8%96%E3%81%A8%E3%82%A6%E3%82%A3%E3%83%BC%E3%83%B3%E5%8C%85%E5%9B%B2.mp3"))}, [])
+    // useEffect(() => {
+    //   console.log('src', track.src)
+    //   setAudio(new Audio(track.src))
+    // }, [track.src])
   );
   console.log(musicRef)
 
@@ -164,7 +167,9 @@ export const AudioPlayer = () => {
         </div>
         <div className={`${styles["ep-date"]}`}>{date}</div>
       </div>
-      <div className={`${styles["ep-title"]}`}>
+      <div className={`${styles["ep-title"]}`} onClick={() => {
+        console.log(setAudio)
+      }}>
         {title}<span className={`${styles["sp-nodisp"]}`}></span>
       </div>
       {/* <div id={styles.timebar}>
