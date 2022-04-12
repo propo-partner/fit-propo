@@ -37,7 +37,7 @@ export default function SignUp () {
 
 
   return (
-    <Layout>
+    <>
       <div className={styles.c_formSec}>
         <p className={`${styles.c_title_small} ${styles.mb20}`}>
         新しいお気に入りの番組を、<br />簡単に見つけよう。
@@ -65,6 +65,6 @@ export default function SignUp () {
         </p>
       </div>
       <CommonBox3 />
-    </Layout>
+    </>
   )
 }

@@ -46,7 +46,7 @@ export default function ListenerInput () {
   }
 
   return (
-    <Layout>
+    <>
       <section className={`${styles.unsubcribe_input} ${styles.mb80}`}>
         <h2 className={`${styles.c_title_center} ${styles.mb12}`} onClick={() => {
           alert('click')
@@ -109,6 +109,6 @@ export default function ListenerInput () {
       </section>
 
       <CommonBox3 />
-    </Layout>
+    </>
   )
 }

@@ -40,7 +40,7 @@ export const AudioPlayer = () => {
 
   const start = () => {
     setMusicCurrentTime(musicRef.current.currentTime)
-    console.log('ここ通ったよ')
+    // console.log('ここ通ったよ')
     if (intervalRef.current !== null) {
       return;
     }
@@ -54,7 +54,6 @@ export const AudioPlayer = () => {
       setTimePosition(musicRef.current.currentTime);
       // console.log(' 再生トラック/経過時間 ');
       // console.log('track ' + musicCurrentTime);
-      console.log('isPlay遷移' + isPlay)
       }
     }, [1000]);
   };
@@ -64,12 +63,10 @@ export const AudioPlayer = () => {
       musicRef.current.play();
       start();
       console.log('track  start ');
-      console.log('ここ通ったよ')
 
     } else {
       musicRef.current.pause();
       console.log('track  pause ');
-      console.log('ここ通ったよ')
       if (intervalRef.current === null) {
         return;
       }

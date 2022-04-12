@@ -6,7 +6,7 @@ import styles from '../styles/common.module.css'
 
 export default function Confirm () {
   return (
-    <Layout>
+    <>
       <section>
         <h2 className={`${styles.c_title_center} ${styles.mb12}`}>受信ボックスをご確認ください</h2>
         <p className={`${styles.c_text} ${styles.mb24} ${styles.align_center_pc}`}>
@@ -24,6 +24,6 @@ export default function Confirm () {
         </p>
       </section>
       <CommonBox3 />
-    </Layout>
+    </>
   )
 }

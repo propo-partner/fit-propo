@@ -7,7 +7,7 @@ import { AudioPlayer } from '../../../components/AudioPlayer'
 export default function LikeUnlikeComplete () {
 
   return (
-    <Layout>
+    <>
       <section>
         <h2 className={`${styles.c_title_center} ${styles.mb12}`}>フィードバック<br />ありがとうございました！</h2>
         <p className={`${styles.c_text} ${styles.mb24} ${styles.align_center_pc}`}>
@@ -24,7 +24,7 @@ export default function LikeUnlikeComplete () {
 				</div>
       </section>
       <CommonBox4 />
-      <AudioPlayer />
-    </Layout>
+      {/* <AudioPlayer /> */}
+    </>
   )
 }

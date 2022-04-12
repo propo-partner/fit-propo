@@ -680,3 +680,63 @@
   padding: 0 24px;
 
 }
+
+/* timebar (episode page) */
+.timebar {
+	width: 100%;
+	height: 1px;
+	background-color: #dfdfdf;
+	margin: 3px 0 11px;
+	border-radius: 6px;
+}
+
+.time_ctl_wrap {
+	display: flex;
+  align-items: center;
+	justify-content: space-between;
+  color: #5a5a5a;
+  font-size: 12px;
+}
+
+#timebar-num {
+	font-size: 12px;
+}
+
+#time_disp {
+	font-size: 11px;
+	color: #0a0a0a;
+	/*margin-right: 108px;*/
+}
+
+#timebar-past {
+	width: 0;
+	height: 3px;
+  position: relative;
+	vertical-align: bottom;
+	background-color: #0a0a0a;
+	text-align: center;
+	border-radius: 6px;
+}
+
+#timebar-past::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #0a0a0a;
+  top: -7.5px;
+  right: 0;
+}
+
+
+#time_disp,
+#speed_ctrl {
+  font-size: 12px;
+  color: #5f5f5f;
+  line-height: 17px;
+
+}
+
+
+

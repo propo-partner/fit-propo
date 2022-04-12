@@ -36,7 +36,6 @@ export default function CommonForm () {
 
 
   return (
-    <Layout>
       <section className={styles.common_footer_sec}>
         <div className={`${styles.c_sec_grey} ${styles.c_propo_info}`}>
         <div className={`${styles.c_propologo} ${styles.mb24}`}>
@@ -76,6 +75,5 @@ export default function CommonForm () {
         </div>
       </section>
 
-    </Layout>
   )
 }
