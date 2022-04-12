@@ -169,12 +169,7 @@ height: 190px; }
 }
 
 /* sp-nav */
-.sp_nav, .sp_size {
-  display: block;
-}
-
-#sp_nav,
-.sp_size {
+.sp_nav {
   display: block; 
 }
 

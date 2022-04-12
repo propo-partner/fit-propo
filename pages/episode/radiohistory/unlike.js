@@ -1,13 +1,14 @@
-import React, { useRef } from "react"
 import { useRouter } from "next/router";
 import Link from 'next/link'
 import CommonBox4 from '../../../components/commonBox4'
 import Layout from '../../../components/Layout'
 import styles from '../../../styles/common.module.css'
 import { useForm } from "react-hook-form";
+import { AudioPlayer } from "../../../components/AudioPlayer";
 
 
 export default function ListenerInput () {
+
   const {
     register,
     handleSubmit,
@@ -79,6 +80,7 @@ export default function ListenerInput () {
       </section>
 
       <CommonBox4 />
+      <AudioPlayer />
     </Layout>
   )
 }

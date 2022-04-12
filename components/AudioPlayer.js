@@ -7,24 +7,22 @@ import episodeImg from "../public/images/thumbnail_rect01.png";
 
 export const AudioPlayer = () => {
   // track
-  const { track, intervalRef, isPlay, setIsPlay } = useContext(DataContext);
+  const { track, intervalRef, isPlay, setIsPlay, musicCurrentTime, setMusicCurrentTime } = useContext(DataContext);
 
-  const { title, date, duration,  epiNum, src } = track;
-  // const thumbnail = episodeImg
-  console.log('src', track.src)
-  console.log(track)
+  const { title, date, duration,  epiNum, src, program } = track;
 
-  // const [audio, setAudio] = useState(null);
-  
   const musicRef = useRef(null)
   useEffect(() => {
     musicRef.current = new Audio(track.src);
+    console.log('ここ通ったよ')
   }, [src]);
-  console.log(musicRef)
+  // console.log(musicRef)
 
-  // const musicCurrentTime = musicRef.current.currentTime;
-  // const musicRate = (Math.floor(musicCurrentTime / track.duration * 100));
- 
+  const musicRate = (Math.floor(musicCurrentTime / track.duration * 100));
+  // const musicRate = (Math.floor(musicRef.current.currentTime / track.duration * 100));
+  // const musicRate = 0
+  // console.log(musicRate)
+
   const [timePosition, setTimePosition] = useState(0); // time position
 
   const speed = [1.0, 1.3, 1.5, 2.0, 0.5, 0.7];
@@ -41,35 +39,37 @@ export const AudioPlayer = () => {
   }
 
   const start = () => {
+    setMusicCurrentTime(musicRef.current.currentTime)
+    console.log('ここ通ったよ')
     if (intervalRef.current !== null) {
       return;
     }
     
     intervalRef.current = setInterval(() => {
       if (musicRef.current.ended) {
-        console.log('nextTrack実行 ');
-        nextTrack();
+        console.log('audio ended ');
+        setIsPlay(false)
+        // nextTrack();
       } else {
-      // setTimePosition(musicRef.current.currentTime);
+      setTimePosition(musicRef.current.currentTime);
       // console.log(' 再生トラック/経過時間 ');
-      // console.log('trackIndex ' + trackIndex + ' / ' + musicRef.current.currentTime);
+      // console.log('track ' + musicCurrentTime);
+      console.log('isPlay遷移' + isPlay)
       }
     }, [1000]);
   };
-
-
-  // useEffect(() => {
-  //   musicRef.current = audio;
-  // }, [src]);
 
   useEffect(() => {
     if(isPlay) {
       musicRef.current.play();
       start();
       console.log('track  start ');
+      console.log('ここ通ったよ')
+
     } else {
-      // musicRef.current.pause();
+      musicRef.current.pause();
       console.log('track  pause ');
+      console.log('ここ通ったよ')
       if (intervalRef.current === null) {
         return;
       }
@@ -86,28 +86,22 @@ export const AudioPlayer = () => {
   const onClickTogglePlay = () => {
     if (isPlay) {
       setIsPlay(!isPlay);
-      // const playingTrack = track[trackIndex];
-      // playingTrack.playing = false;
-      // console.log('isPlay change ' + isPlay);
     } else {
       setIsPlay(!isPlay);
-      // const playingTrack = track[trackIndex];
-      // playingTrack.playing = true;
-
-      // console.log('!isPlay change ' + isPlay);
+      setMusicCurrentTime(musicRef.current.currentTime)
     }
   }
 
   // prev 15s
   const onClickBack = () => {
     console.log("15s playback");
-    // musicRef.current.currentTime -= 15;
+    musicRef.current.currentTime -= 15;
   }
   
   // next 30s
   const onClickSkip = () => {
     console.log("30s playskip");
-    // musicRef.current.currentTime += 30;
+    musicRef.current.currentTime += 30;
   }
 
 
@@ -118,7 +112,7 @@ export const AudioPlayer = () => {
     // console.log('timeBarクリック: ' + timeBarX / timeBarWidth * track[trackIndex].duration + '');
     // console.log(e.target.getBoundingClientRect().width);
     // console.log(e.nativeEvent.offsetX);
-    // musicRef.current.currentTime = (timeBarX / timeBarWidth * track[trackIndex].duration);
+    musicRef.current.currentTime = (timeBarX / timeBarWidth * track.duration);
   }
 
   // speed change
@@ -135,15 +129,12 @@ export const AudioPlayer = () => {
       }
     }
     musicRef.current.playbackRate = speed[speedNextIndex];
-    console.log(speedIndex);
-    console.log(speedNextIndex + 'next');
+    // console.log(speedIndex);
+    // console.log(speedNextIndex + 'next');
   }
 
   return (
     <>
-    <Head>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    </Head>
     <div id={styles.app} className={styles.app}>
     <div id={styles.audio_thumb}>
       <img className={styles.ep_img} src={episodeImg.src} alt={epiNum} />
@@ -151,29 +142,30 @@ export const AudioPlayer = () => {
       <div className={styles.play_btn_wrap} onClick={onClickTogglePlay}>
       {isPlay? 
         (
-          <i id={styles.pause_ico} className={`${styles["material-icons"]}`}>pause_circle_outline</i>
+          <span className={["material-icons-outlined"]}>pause_circle_outline</span>
         ) : (
-          <i id={styles.play_ico} className={`${styles["material-icons"]}`}>play_circle_outline</i>
+          <span className={["material-icons-outlined"]}>play_circle_outline</span>
         )
       }
       </div>
     </div>
     <div id={styles.audio_desc}>
       <div className={styles.audio_desc_upper}>
-        <div className={`${styles["ep-programName"]}`}>MOTION GALLERY CROSSING（モーショングギャラリークロッシング）
+        <div className={`${styles["ep-programName"]}`}>
+          {program}
         </div>
         <div className={`${styles["ep-date"]}`}>{date}</div>
       </div>
       <div className={`${styles["ep-title"]}`}>
         {title}<span className={`${styles["sp-nodisp"]}`}></span>
       </div>
-      {/* <div id={styles.timebar}>
-        <div id={`${styles["timebar-bg"]}`} onClick={onClickTime} ref={timeBar}>
+      <div className={styles.timebar}>
+        <div onClick={onClickTime} ref={timeBar}>
           <div id={`${styles["timebar-past"]}`} style={{width: musicRate + '%'}}>
             <div id={`${styles["timebar-num"]}`}>{musicRate + '%'}</div>
           </div>
         </div>
-      </div> */}
+      </div>
       <div className={styles.time_ctl_wrap}>
         <span id={styles.time_disp}>
         {musicTime(timePosition)}/

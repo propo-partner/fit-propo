@@ -9,32 +9,23 @@ import { AudioPlayer } from '../../components/AudioPlayer';
 export default function EpisodePlay () {
 
   // episode info only
-  const url = 'https://api.json-generator.com/templates/5g-ILyuHM4AL/data?access_token=6a76lvuqp3cwnx944w7p5w2e1mv7v7puos3rn15p'
+  // const url = 'https://api.json-generator.com/templates/5g-ILyuHM4AL/data?access_token=6a76lvuqp3cwnx944w7p5w2e1mv7v7puos3rn15p'
 
   // program + episode info
-  // const url = 'https://api.json-generator.com/templates/QgSAkpfZNNRi/data?access_token=6a76lvuqp3cwnx944w7p5w2e1mv7v7puos3rn15p'
+  const url = 'https://api.json-generator.com/templates/QgSAkpfZNNRi/data?access_token=6a76lvuqp3cwnx944w7p5w2e1mv7v7puos3rn15p'
   
-  const { track, setTrack, isPlay, setIsPlay, trackIndex, setTrackIndex, episode, setEpisode,  } = useContext(DataContext)
+  const { track, setTrack } = useContext(DataContext)
 
   useEffect(() => {
     (async() => {
       const respons = await fetch(url)
       const data = await respons.json()
-      // setEpisode(data)
       setTrack(data)
     })()
   }, [])
 
-  // const { apple } = useContext(DataContext);
-  // console.log('episode', episode);
   console.log('title', track.title);
   console.log('track', track);
-
-  // useEffect(() => {
-  //   fetch(url)
-  //     .then(res=> res.json())
-  //     .then(res=> setEpisode(res))
-  // }, [])
 
   return (
     <Layout>
@@ -55,7 +46,7 @@ export default function EpisodePlay () {
             エピソードプレイバーが入ります
             </div>
             <h2 className={`${styles.c_title} ${styles.mb12} ${styles.episode_title}`}>{track.title}</h2>
-            <p className={`${styles.c_text_grey} ${styles.mb8} ${styles.program_title}`}>ラジレキ - ラジオ歴史小話</p>
+            <p className={`${styles.c_text_grey} ${styles.mb8} ${styles.program_title}`}>{track.program}</p>
             <p className={styles.c_text_grey12}>{track.date}</p>
           </div>
         </div>
@@ -103,7 +94,8 @@ export default function EpisodePlay () {
                 </a>
               </div>
               <p className={`${styles.detail} ${styles.c_text}`}>
-              『ラジレキ 〜りーとん・そっしーのラジオ歴史小話〜』 〜歴史 × ビジネス × 雑談ネタ × ゆるさ〜 意外な組み合わせを、\&quot;歴史フリーク\&quot; りーとんと、\&quot;頑張るマン\&quot; そっしーの二人が織りなす、ゆるく聞きやすく、時に痛快に展開するポッドキャスト（Podcast）番組。 難しい！と感じる歴史のハナシも、身近なものと組み合わせてくれると思わず誰かとシェアしたくなるから不思議です。 ゆる～く、かるく、やわらかく、皆さんの耳に♪
+              {track.description}
+              {/* 『ラジレキ 〜りーとん・そっしーのラジオ歴史小話〜』 〜歴史 × ビジネス × 雑談ネタ × ゆるさ〜 意外な組み合わせを、\&quot;歴史フリーク\&quot; りーとんと、\&quot;頑張るマン\&quot; そっしーの二人が織りなす、ゆるく聞きやすく、時に痛快に展開するポッドキャスト（Podcast）番組。 難しい！と感じる歴史のハナシも、身近なものと組み合わせてくれると思わず誰かとシェアしたくなるから不思議です。 ゆる～く、かるく、やわらかく、皆さんの耳に♪ */}
               </p>
             </div>
           </div>

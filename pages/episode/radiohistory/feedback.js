@@ -2,8 +2,10 @@ import Link from 'next/link'
 import CommonBox4 from '../../../components/commonBox4'
 import Layout from '../../../components/Layout'
 import styles from '../../../styles/common.module.css'
+import { AudioPlayer } from '../../../components/AudioPlayer'
 
 export default function LikeUnlikeComplete () {
+
   return (
     <Layout>
       <section>
@@ -22,6 +24,7 @@ export default function LikeUnlikeComplete () {
 				</div>
       </section>
       <CommonBox4 />
+      <AudioPlayer />
     </Layout>
   )
 }

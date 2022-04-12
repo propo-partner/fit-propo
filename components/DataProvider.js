@@ -8,8 +8,8 @@ export const DataProvider = (props) => {
   const intervalRef = useRef(null);
   const [track, setTrack] = useState([]);
   const [isPlay, setIsPlay] = useState(false); // playing state
-  const test = 'abc';
-  const [episode, setEpisode] = useState([])
+  const [musicCurrentTime, setMusicCurrentTime] = useState(0);
+  // const [episode, setEpisode] = useState([])
 
   return (
     <DataContext.Provider
@@ -19,9 +19,10 @@ export const DataProvider = (props) => {
         setTrack,
         isPlay,
         setIsPlay,
-        episode,
-        setEpisode,
-        test
+        musicCurrentTime,
+        setMusicCurrentTime,
+        // episode,
+        // setEpisode,
       }}>
       {children}
     </DataContext.Provider>
