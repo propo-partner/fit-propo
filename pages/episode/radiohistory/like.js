@@ -1,10 +1,10 @@
-import React, { useRef } from "react"
 import { useRouter } from "next/router";
 import Link from 'next/link'
-import CommonBox3 from '../../../components/commonBox3'
+import CommonBox4 from '../../../components/commonBox4'
 import Layout from '../../../components/Layout'
 import styles from '../../../styles/common.module.css'
 import { useForm } from "react-hook-form";
+import { AudioPlayer } from "../../../components/AudioPlayer";
 
 
 export default function ListenerInput () {
@@ -59,7 +59,7 @@ export default function ListenerInput () {
             </textarea>
           </div>
 
-          <div className={`${styles.c_flex_wrap_center} ${styles.mb24}`}>
+          <div className={`${styles.c_flex_wrap_center} ${styles.mb80}`}>
               <div className={`${styles.c_roundBtn_white_small} ${styles.mr12} ${styles.m0}`}>
                 <Link href="/episode/radiohistory">
                   <a className={styles.c_roundBtn_inner}>
@@ -78,7 +78,8 @@ export default function ListenerInput () {
           </form>
       </section>
 
-      <CommonBox3 />
+      <CommonBox4 />
+      <AudioPlayer />
     </Layout>
   )
 }

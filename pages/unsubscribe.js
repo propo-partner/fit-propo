@@ -14,16 +14,16 @@ export default function ListenerInput () {
     watch,
     getValues,
     formState: { errors },
-    // defaultValues
+    defaultValues
   } = useForm();
 
   const router = useRouter();
 
   const reasonLists = [
-    "メール配信内容が好みに合わなかった",
-    "面白いエピソードが出会えなかった",
-    "メール配信頻度が多い",
-    "その他",
+    {id: "reason1", reason: "メール配信内容が好みに合わなかった", checked: true},
+    {id: "reason2", reason: "面白いエピソードが出会えなかった", checked: false},
+    {id: "reason3", reason: "メール配信頻度が多い", checked: false},
+    {id: "reason4", reason: "その他", chaeked: false},
   ]
 
   const onSubmit = async (data) => {
@@ -45,11 +45,12 @@ export default function ListenerInput () {
     }
   }
 
-
   return (
     <Layout>
       <section className={`${styles.unsubcribe_input} ${styles.mb80}`}>
-        <h2 className={`${styles.c_title_center} ${styles.mb12}`}>メール配信を停止しました。</h2>
+        <h2 className={`${styles.c_title_center} ${styles.mb12}`} onClick={() => {
+          alert('click')
+        }}>メール配信を停止しました。</h2>
         <p className={`${styles.c_text} ${styles.mb24} ${styles.align_center_pc}`}>
           もしよろしければ、配信停止された理由を教えてください（複数選択可）。
         </p>
@@ -62,15 +63,17 @@ export default function ListenerInput () {
               return (
                 <div className={styles.c_check_wrap_100} key={`key_${index}`}>
                 <label className={styles.c_label_check}>
-                  <input 
-                    {...register("unsubscribeReason[]", {})}
-                    id="reason"
+                  <input
+                    {...register("test", {
+                    })}
+                    defaultChecked={"メール配信内容が好みに合わなかった".includes(item.reason)}
+                    id={item.id}
                     type="checkbox"
-                    value={item}
-                    name="unsubscribeReason[]"
+                    value={item.reason}
+                    // name="unsubscribeReason[]"
                     className={styles.c_input_check} 
                     />
-                    {item}
+                    {item.reason}
                 </label>
               </div>
               )

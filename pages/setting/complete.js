@@ -14,7 +14,7 @@ export default function TopicComplete () {
         <div className={`${styles.c_roundBtn} ${styles.mb24} ${styles.align_center_pc}`}>
 					<a href="https://propo.fm/" className={styles.c_roundBtn_inner}>
             <span>トップページに戻る</span>
-            <img className={styles.ico_right} src="/images/ico_back.svg" />
+            <img className={`${styles.ico_right} ${styles.ico_back}`} src="/images/ico_back.svg" />
           </a>
 				</div>
         <p className={`${styles.c_text} ${styles.mb80}`}>

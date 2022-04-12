@@ -34,6 +34,7 @@
   left: calc(50% - 12.5px);
 	margin: auto;
   cursor: pointer;
+	color: #0d958e;
 }
 
 #play_ico,
@@ -46,9 +47,9 @@
 	z-index: 5;
 }
 
-#pause_ico {
+/* #pause_ico {
 	display: none;
-}
+} */
 
 #audio_desc {
 	flex: 1;
@@ -96,7 +97,7 @@
 	margin-bottom: 6px;
 }
 
-#timebar {
+.timebar {
 	width: 100%;
 	height: 12px;
 	background-color: lightgray;
@@ -207,7 +208,7 @@
 		height: 30.8px;
 	}
 	
-	#timebar {
+	.timebar {
 		margin: 0 0 -5px;
 	}
 
@@ -310,7 +311,7 @@
 		line-height: 1.2;
 	}
 	
-	#timebar {
+	.timebar {
 		margin: 0 0 -10px;
 		height: 10px;
 	}
@@ -349,13 +350,6 @@
   direction: ltr;
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
-}
-
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/materialicons/v126/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2) format('woff2');
 }
 
 
