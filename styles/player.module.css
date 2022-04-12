@@ -5,7 +5,7 @@
   right: 40px;
   bottom: 0;
 	width: 100%;
-	margin-bottom: 16px;
+	/* margin-bottom: 16px; */
   box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.12);
 	padding: 8px 16px 12px;
   background: #ffffff;
@@ -23,7 +23,6 @@
 .ep_img {
 	width: 100%;
 	height: auto;
-  border: 1px solid #eaeaea;
 }
 
 .play_btn_wrap {
@@ -184,10 +183,11 @@
 
 @media only screen and ( max-width: 666px ) {
 	#app {
-		height: 110px;
+		/* height: 110px; */
+		right: 0;
 	}
 
-	#audio_thumb {
+	/* #audio_thumb {
 		width: 80px;
 		margin: 15px 0 0 15px;
 	}
@@ -216,13 +216,13 @@
 	#speed_ctrl {
 		font-size: 10px;
 		line-height: 1.5;
-	}
+	} */
 
 /*#time_disp {
 		margin-right: 100px;
 	}*/
 
-	#playback,
+	/* #playback,
 	#skip {
 		width: 14px;
 	}
@@ -236,7 +236,7 @@
 		font-size: 60px;
 		top: calc(50% - 32px);
 		right: calc(50% - 30px);
-	}
+	} */
 }
 
 @media only screen and ( max-width: 384px ) {
@@ -248,35 +248,35 @@
 		width: 95px;
 	} */
 	
-	#audio_desc {
+	/* #audio_desc {
 		width: calc(100% - 115px);
 		padding: 15px 10px 0;
 	}
-	
-	.ep-date {
+	 */
+	/* .ep-date {
 		margin-bottom: 0;
-	}
+	} */
 	
 	/*#time_disp {
 		margin-right: 80px;
 	}*/
 	
-	#playback {
+	/* #playback {
 		margin-right: 10px;
-	}
+	} */
 	
-	.sp-nodisp {
+	/* .sp-nodisp {
 		display: none;
-	}
+	} */
 
 
 }
 
 @media only screen and ( max-width: 360px ) {
-	#playback {
+	/* #playback {
 	margin-right: 5px;
 	}
-	
+	 */
 	/*#time_disp {
 		margin-right: 50px;
 	}*/
@@ -289,7 +289,7 @@
 }*/
 
 @media only screen and ( max-width: 320px ) {
-	#app {
+	/* #app {
 		height: 80px;
 	}
 
@@ -319,20 +319,20 @@
 	#time_disp,
 	#speed_ctrl {
 		font-size: 8px;
-	}
+	} */
 
 	/*#time_disp {
 		margin-right: 5px;
 	}*/
 	
-	#timebar-num {
+	/* #timebar-num {
 		font-size: 8px;
 		bottom: 8px;
 	}
 	
 	#timebar-past {
 		height: 10px;
-	}
+	} */
 	
 }
 

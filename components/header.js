@@ -57,7 +57,7 @@ export default function Header () {
             </li>
             <li className={styles.global_nav_list__item}><a href="https://propo.fm/service">Service</a></li>
             <li className={`${styles.global_nav_list__item}`}>
-              <a href="https://mg.propo.fm/about/">About PROPO</a>
+              <a href="https://mg.propo.fm/about/">About</a>
                 <ul className={styles.global_nav_second_list}>
                 <li><a href="https://mg.propo.fm/community/">Community</a></li>
                 </ul>

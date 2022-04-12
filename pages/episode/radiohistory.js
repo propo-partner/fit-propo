@@ -37,7 +37,7 @@ export default function EpisodePlay () {
 
   return (
     <>
-      <section>
+      <section className={styles.episode_wrap}>
         <div className={styles.episode_play_sec}>
           <div className={styles.episode_thumbnail}>
             <img src="/images/thumbnail_rect01.png" alt="" />
@@ -46,12 +46,16 @@ export default function EpisodePlay () {
           {isPlay ? (
             <div className={styles.c_roundBtn_inner}>
               <span>停止する</span>
-              <img className={styles.ico_right} src="/images/ico_play.svg" />
+              <span className={` ${["material-icons-outlined"]} ${styles.ico_right}`}>play_circle_outline</span>
+
+              {/* <img className={styles.ico_right} src="/images/ico_play.svg" /> */}
             </div>
             ) : (
               <div className={styles.c_roundBtn_inner}>
               <span>エピソードを聴く</span>
-              <img className={styles.ico_right} src="/images/ico_play.svg" />
+              <span className={` ${["material-icons-outlined"]} ${styles.ico_right}`}>play_circle_outline</span>
+
+              {/* <img className={styles.ico_right} src="/images/ico_play.svg" /> */}
             </div>
             )
           }
@@ -81,7 +85,7 @@ export default function EpisodePlay () {
           </div>
         </div>
         <div className={`${styles.c_greybox} ${styles.c_question_box} ${styles.mb40}`}>
-          <p className={`${styles.c_title} ${styles.mb12}`}>このエピソードは<br />あなたの興味に合いましたか？</p>
+          <p className={`${styles.c_title} ${styles.mb8}`}>このエピソードは<br />あなたの興味に合いましたか？</p>
           <p className={`${styles.c_text} ${styles.mb16}`}>
           フィードバックいただけると、もっと興味のあるエピソードをお届けすることができます。
           </p>

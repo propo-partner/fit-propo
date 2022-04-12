@@ -76,11 +76,6 @@ export default function Home() {
       <br />
       <br />
       <br />
-      <div>
-        <Link href="/signup">
-          <a>B-7_メニューからの遷移時</a>
-        </Link>
-      </div>
     </div>
   )
 }

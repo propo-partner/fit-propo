@@ -31,7 +31,7 @@
 }
 
 .header__brand img {
-  width: 157px;
+  width: 198px;
 }
 
 .header__nav {
@@ -52,6 +52,12 @@
   .header__nav {
     display: none; 
   }
+
+  .header__brand img {
+    width: 157px;
+  }
+  
+  
 }
 
 .header__nav__list {
@@ -61,7 +67,7 @@
 
 .global_nav_list__item {
   position: relative;
-  margin-right: 50px;
+  margin-right: 47px;
 }
 .global_nav_list__item:hover .global_nav_second_list {
   display: block;
@@ -72,9 +78,10 @@
 }
 .global_nav_list a {
   position: relative;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 22px;
   letter-spacing: 1px;
+  color: #747474;
   cursor: pointer;
 }
 .global_nav_list a::after {
@@ -155,6 +162,7 @@ height: 190px; }
 @media (min-width: 861px) {
   .header_bgWrap {
     background-position: calc(50% - 606px) -80px, calc(50% - 270px) 40px, calc(50% + 610px) -80px;
+    background-size: inherit;
   }
 
   .header {

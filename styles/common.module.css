@@ -526,6 +526,7 @@
   .c_textlink:hover,
   .c_roundBtn:hover,
   .c_roundBtn_white:hover {
+    cursor: pointer;
     opacity: 0.7;
   }
 }
@@ -644,8 +645,16 @@
 }
 
 @media (min-width: 768px) {
+  .episode_wrap {
+    margin-top: -40px;
+  }
+    
   .episode_thumbnail {
     width: 240px;
+  }
+
+  .program_info_wrap {
+    align-items: flex-start;
   }
 
   .program_info_wrap .info_content {
@@ -700,12 +709,6 @@
 
 #timebar-num {
 	font-size: 12px;
-}
-
-#time_disp {
-	font-size: 11px;
-	color: #0a0a0a;
-	/*margin-right: 108px;*/
 }
 
 #timebar-past {
