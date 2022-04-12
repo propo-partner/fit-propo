@@ -40,7 +40,7 @@ export default function ListenerInput () {
 
 
   return (
-    <Layout>
+    <>
       <section className={styles.listener_like_input}>
         <h2 className={`${styles.c_title_center} ${styles.mb12}`}>ご回答ありがとうございます！</h2>
         <p className={`${styles.c_text} ${styles.mb24} `}>
@@ -79,7 +79,7 @@ export default function ListenerInput () {
       </section>
 
       <CommonBox4 />
-      <AudioPlayer />
-    </Layout>
+      {/* <AudioPlayer /> */}
+    </>
   )
 }

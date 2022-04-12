@@ -61,7 +61,7 @@ export default function ListenerInput () {
 
 
   return (
-    <Layout>
+    <>
       <section className={styles.listener_topic_input}>
         <h2 className={`${styles.c_title_center} ${styles.mb12}`}>トピックの登録</h2>
         <p className={`${styles.c_text} ${styles.mb24} ${styles.align_center_pc}`}>
@@ -146,6 +146,5 @@ export default function ListenerInput () {
       </section>
 
       <CommonBox3 />
-    </Layout>
-  )
+    </>
 }

@@ -5,7 +5,7 @@ import styles from '../styles/common.module.css'
 
 export default function UnsubscibeComplete () {
   return (
-    <Layout>
+    <>
       <section>
         <h2 className={`${styles.c_title_center} ${styles.mb12}`}>メール配信を停止しました。</h2>
         <p className={`${styles.c_text} ${styles.mb24} ${styles.align_center_pc}`}>
@@ -19,6 +19,6 @@ export default function UnsubscibeComplete () {
 				</div>
       </section>
       <CommonBox3 />
-    </Layout>
+    </>
   )
 }

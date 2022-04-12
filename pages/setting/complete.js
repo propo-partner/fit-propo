@@ -5,7 +5,7 @@ import styles from '../../styles/common.module.css'
 
 export default function TopicComplete () {
   return (
-    <Layout>
+    <>
       <section>
         <h2 className={`${styles.c_title_center} ${styles.mb12}`}>あなたの興味を登録しました。</h2>
         <p className={`${styles.c_text} ${styles.mb24} ${styles.align_center_pc}`}>
@@ -22,6 +22,6 @@ export default function TopicComplete () {
         </p>
       </section>
       <CommonBox3 />
-    </Layout>
+    </>
   )
 }

@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Header from './header'
 import Footer from './footer'
+import { AudioPlayer } from './AudioPlayer'
 
 export default function Layout({ children }) {
   return (
@@ -15,6 +16,7 @@ export default function Layout({ children }) {
       <main className='main'>
         {children}
       </main>
+      <AudioPlayer />
       <Footer />
     </>
   )

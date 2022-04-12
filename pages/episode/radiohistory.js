@@ -14,7 +14,7 @@ export default function EpisodePlay () {
   // program + episode info
   const url = 'https://api.json-generator.com/templates/QgSAkpfZNNRi/data?access_token=6a76lvuqp3cwnx944w7p5w2e1mv7v7puos3rn15p'
   
-  const { track, setTrack } = useContext(DataContext)
+  const { track, setTrack, isPlay, setIsPlay} = useContext(DataContext)
 
   useEffect(() => {
     (async() => {
@@ -27,23 +27,53 @@ export default function EpisodePlay () {
   console.log('title', track.title);
   console.log('track', track);
 
+  const onClickPlay = () => {
+    if(isPlay) {
+      setIsPlay(false)
+    } else {
+      setIsPlay(true)
+    }
+  }
+
   return (
-    <Layout>
+    <>
       <section>
         <div className={styles.episode_play_sec}>
           <div className={styles.episode_thumbnail}>
             <img src="/images/thumbnail_rect01.png" alt="" />
           </div>
-          <div className={`${styles.c_roundBtn} ${styles.mb24} ${styles.align_center_pc}`}>
-            <a href="https://propo.fm/" className={styles.c_roundBtn_inner}>
+          <div className={`${styles.c_roundBtn} ${styles.mb30} ${styles.align_center_pc}`} onClick={onClickPlay}>
+          {isPlay ? (
+            <div className={styles.c_roundBtn_inner}>
+              <span>停止する</span>
+              <img className={styles.ico_right} src="/images/ico_play.svg" />
+            </div>
+            ) : (
+              <div className={styles.c_roundBtn_inner}>
               <span>エピソードを聴く</span>
               <img className={styles.ico_right} src="/images/ico_play.svg" />
-            </a>
-            <input className={styles.c_submit_btn_hidden} type="submit" value="" />
+            </div>
+            )
+          }
           </div>
           <div className={styles.audio_player_wrap}>
             <div className={`${styles.timeber} ${styles.mb16}`}>
-            エピソードプレイバーが入ります
+              <div className={styles.timebar}>
+                {/* <div onClick={onClickTime} ref={timeBar}> */}
+                <div>
+                  {/* <div id={`${styles["timebar-past"]}`} style={{width: musicRate + '%'}}> */}
+                  <div id={`${styles["timebar-past"]}`} style={{width: '50%'}}>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.time_ctl_wrap}>
+                <span id={styles.time_disp}>00:00:00 | 13:46:22
+                  {/* {musicTime(timePosition)}/
+                  {musicTime(duration)} */}
+                </span>
+                {/* <span id={`${styles["timebar-num"]}`}>{musicRate + '%'}</span> */}
+                <span id={`${styles["timebar-num"]}`}>{'50%'}</span>
+              </div>
             </div>
             <h2 className={`${styles.c_title} ${styles.mb12} ${styles.episode_title}`}>{track.title}</h2>
             <p className={`${styles.c_text_grey} ${styles.mb8} ${styles.program_title}`}>{track.program}</p>
@@ -105,7 +135,7 @@ export default function EpisodePlay () {
       </section>
 
       <CommonBox4 />
-      <AudioPlayer />
-    </Layout>
+    </>
+
   )
 }
