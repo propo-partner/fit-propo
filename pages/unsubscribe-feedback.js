@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import CommonBox3 from '../components/commonBox3'
-import Layout from '../components/Layout'
 import styles from '../styles/common.module.css'
 
 export default function UnsubscibeComplete () {

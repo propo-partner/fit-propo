@@ -1,8 +1,14 @@
 import Link from 'next/link'
 import CommonBox4 from '../../../components/commonBox4'
-import Layout from '../../../components/Layout'
 import styles from '../../../styles/common.module.css'
-import { AudioPlayer } from '../../../components/AudioPlayer'
+
+export const getStaticProps = async () => {
+  return {
+    props: {
+      layout: 'withPlayer'
+    },
+  }
+}
 
 export default function LikeUnlikeComplete () {
 

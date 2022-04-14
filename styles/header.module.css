@@ -502,3 +502,19 @@ margin-bottom: 40px; }
   }
 }
 
+
+#cat_podcasting,
+#cat_hotepisodes,
+#cat_usecase,
+#cat_news,
+#cat_interview {
+  color: red;
+}
+
+.cat_tab01,
+.cat_tab02,
+.cat_tab03,
+.cat_tab04,
+.cat_tab05 {
+
+}

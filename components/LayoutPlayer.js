@@ -4,7 +4,7 @@ import Header from './header'
 import Footer from './footer'
 import { AudioPlayer } from './AudioPlayer'
 
-export default function Layout({ children }) {
+export default function LayoutPlayer({ children }) {
   return (
     <>
       <Head>

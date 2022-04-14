@@ -1,8 +1,6 @@
 import React, { useRef } from "react"
 import { useRouter } from "next/router";
-import Link from 'next/link'
 import CommonBox3 from '../../components/commonBox3'
-import Layout from '../../components/Layout'
 import styles from '../../styles/common.module.css'
 import { useForm } from "react-hook-form";
 

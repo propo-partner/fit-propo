@@ -1,10 +1,16 @@
 import Link from 'next/link'
-import Layout from '../../components/Layout'
 import styles from '../../styles/common.module.css'
 import CommonBox4 from "../../components/commonBox4";
 import React, { useContext, useEffect } from 'react'
 import { DataContext } from '../../components/DataProvider';
-import { AudioPlayer } from '../../components/AudioPlayer';
+
+export const getStaticProps = async () => {
+  return {
+    props: {
+      layout: 'withPlayer'
+    },
+  }
+}
 
 export default function EpisodePlay () {
 
