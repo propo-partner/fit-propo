@@ -267,6 +267,8 @@
   transition: .4s;
   padding: 0 24px;
   font-size: 16px;
+  cursor: pointer;
+  transition: 0.4s;
 }
 
 .c_roundBtn_white_small .c_roundBtn_inner {
@@ -525,7 +527,8 @@
 @media (min-width: 1024px) {
   .c_textlink:hover,
   .c_roundBtn:hover,
-  .c_roundBtn_white:hover {
+  .c_roundBtn_white:hover,
+  .c_roundBtn_white_small:hover {
     cursor: pointer;
     opacity: 0.7;
   }
@@ -740,6 +743,5 @@
   line-height: 17px;
 
 }
-
 
 

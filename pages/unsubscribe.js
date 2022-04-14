@@ -14,7 +14,8 @@ export default function ListenerInput () {
     watch,
     getValues,
     formState: { errors },
-    defaultValues
+    defaultValues,
+    reset
   } = useForm();
 
   const router = useRouter();
@@ -92,7 +93,7 @@ export default function ListenerInput () {
           </div>
 
           <div className={`${styles.c_flex_wrap_center} ${styles.mb24}`}>
-              <div className={`${styles.c_roundBtn_white_small} ${styles.mr12} ${styles.m0}`}>
+              <div className={`${styles.c_roundBtn_white_small} ${styles.mr12} ${styles.m0}`} onClick={() => reset()}>
                 <div className={styles.c_roundBtn_inner}>
                   <span>内容をクリア</span>
                 </div>
