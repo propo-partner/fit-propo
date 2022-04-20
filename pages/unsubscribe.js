@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router";
 import Link from 'next/link'
 import CommonBox4 from '../components/commonBox4'
@@ -18,31 +18,59 @@ export default function ListenerInput () {
   } = useForm();
 
   const router = useRouter();
+  const [optoutReasons, setOptoutReasons] = useState([])
 
-  const reasonLists = [
-    {id: "reason1", reason: "メール配信内容が好みに合わなかった", checked: true},
-    {id: "reason2", reason: "面白いエピソードが出会えなかった", checked: false},
-    {id: "reason3", reason: "メール配信頻度が多い", checked: false},
-    {id: "reason4", reason: "その他", chaeked: false},
-  ]
+  // get optout-reasons
+  const url = 'https://v1.nocodeapi.com/propofm/airtable/vWKvQMugEcliaMcn?tableName=optout_reasons'
+  
+  useEffect(() => {
+    (async() => {
+      const respons = await fetch(url)
+      const data = await respons.json()
+      setOptoutReasons([...data.records])
+    })()
+  }, [])
 
+  // const [freeMessage, setFreeMessage] = useState()
+  // const [reasonsText, setReasonsText] = useState()
+  // submit
   const onSubmit = async (data) => {
-    console.log(data)
-    // success
-    const url = "https://api.json-generator.com/templates/60TLGKL5wU4k/data?access_token=lk2rn4iwvnw4vobuicawllp6fp4wj1we2n35raua"
 
-    const params = {
-      method: 'POST',
-      body: data
-    }
-    console.log(params)
-    const res = await fetch(url, params)
+    // setReasonsText((data.reasons).join(','))
+    // setFreeMessage(data.unsubscribeText)
+    // console.log(reasonsText)
+    
+    const putData = 
+      {
+        uid: "300",
+        selected_item: (data.reasons).join(','),
+        free_message: data.unsubscribeText
+      }
+
+    // console.log(putData)
+
+    // post data
+    const postUrl = "https://v1.nocodeapi.com/propofm/airtable/vWKvQMugEcliaMcn?tableName=optout_logs&typecast=post"
+
+    const optoutHeaders = new Headers();
+    optoutHeaders.append("Content-Type", "application/json");
+    const requestOptions = {
+      method: "post",
+      headers: optoutHeaders,
+      redirect: "follow",
+      body: JSON.stringify([
+        putData
+      ])
+    };
+    
+    const res = await fetch(postUrl, requestOptions)
     const result = await res.json()
-    console.log(result.status);
+    // console.log("result", result);
 
-    if (result.status === 'success') {
+    if (res.ok) {
       router.push("/unsubscribe-feedback")
     }
+
   }
 
   return (
@@ -58,22 +86,22 @@ export default function ListenerInput () {
           <p className={`${styles.c_title_16} ${styles.mb16}`}>理由</p>
           <div className={`${styles.flexstart} ${styles.mb40}`}>
 
-            { reasonLists.map((item, index) => {
+            { optoutReasons.map((item, index) => {
               index = index + 1
               return (
                 <div className={styles.c_check_wrap_100} key={`key_${index}`}>
                 <label className={styles.c_label_check}>
                   <input
-                    {...register("test", {
+                    {...register("reasons", {
                     })}
-                    defaultChecked={"メール配信内容が好みに合わなかった".includes(item.reason)}
+                    defaultChecked={"メール配信内容が好みに合わなかった".includes(item.fields.item)}
                     id={item.id}
                     type="checkbox"
-                    value={item.reason}
+                    value={item.fields.item}
                     // name="unsubscribeReason[]"
                     className={styles.c_input_check} 
                     />
-                    {item.reason}
+                    {item.fields.item}
                 </label>
               </div>
               )
