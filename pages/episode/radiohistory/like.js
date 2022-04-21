@@ -25,20 +25,33 @@ export default function ListenerInput () {
   const router = useRouter();
 
   const onSubmit = async (data) => {
-    console.log(data)
-    // success
-    const url = "https://api.json-generator.com/templates/60TLGKL5wU4k/data?access_token=lk2rn4iwvnw4vobuicawllp6fp4wj1we2n35raua"
+    const putDataIntentMessageLogs = 
+      {
+        uid: "305",
+        episode_id: "episode1",
+        message: data.likeText,
+      }
 
-    const params = {
-      method: 'POST',
-      body: data
+    console.log(putDataIntentMessageLogs)
+
+    // post data
+    const postUrl = "https://v1.nocodeapi.com/propofm/airtable/vWKvQMugEcliaMcn?tableName=intent_massage_logs&typecast=post"
+
+    const intentHeaders = new Headers();
+    intentHeaders.append("Content-Type", "application/json");
+    const requestOptions = {
+      method: "post",
+      headers: intentHeaders,
+      redirect: "follow",
+      body: JSON.stringify([
+        putDataIntentMessageLogs
+      ])
     }
-    console.log(params)
-    const res = await fetch(url, params)
-    const result = await res.json()
-    console.log(result.status);
 
-    if (result.status === 'success') {
+    const res = await fetch(postUrl, requestOptions)
+    const result = await res.json()
+
+    if (res.ok) {
       router.push("/episode/radiohistory/feedback")
     }
   }

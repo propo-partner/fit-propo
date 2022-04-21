@@ -1,8 +1,10 @@
 import Link from 'next/link'
+import { useRouter } from "next/router";
 import styles from '../../styles/common.module.css'
 import CommonBox4 from "../../components/commonBox4";
 import React, { useContext, useEffect, useRef } from 'react'
 import { DataContext } from '../../components/DataProvider';
+
 
 export const getStaticProps = async () => {
   return {
@@ -12,7 +14,10 @@ export const getStaticProps = async () => {
   }
 }
 
+
 export default function EpisodePlay () {
+  const router = useRouter();
+
 
   // episode info only
   // const url = 'https://api.json-generator.com/templates/5g-ILyuHM4AL/data?access_token=6a76lvuqp3cwnx944w7p5w2e1mv7v7puos3rn15p'
@@ -53,6 +58,70 @@ export default function EpisodePlay () {
     timeBarWidth = e.target.getBoundingClientRect().width;
     timeBarX = e.nativeEvent.offsetX;
     musicCurrentTime = (timeBarX / timeBarWidth * track.duration);
+  }
+
+  // like btn
+  const onClickLikeBtn = async () => {
+    const putDataIntentLike = 
+      {
+        uid: "305",
+        intent: "like",
+        context: "episode_page",
+        episode_id: "episode1",
+      }
+
+    // post data
+    const postUrl = "https://v1.nocodeapi.com/propofm/airtable/vWKvQMugEcliaMcn?tableName=user_intent_logs&typecast=post"
+
+    const intentHeaders = new Headers();
+    intentHeaders.append("Content-Type", "application/json");
+    const requestOptions = {
+      method: "post",
+      headers: intentHeaders,
+      redirect: "follow",
+      body: JSON.stringify([
+        putDataIntentLike
+      ])
+    }
+
+    const res = await fetch(postUrl, requestOptions)
+    const result = await res.json()
+
+    if (res.ok) {
+      router.push("/episode/radiohistory/like")
+    }
+  }
+  
+  // unlike btn
+  const onClickUnlikeBtn = async () => {
+    const putDataIntentUnlike = 
+      {
+        uid: "301",
+        intent: "unlike",
+        context: "episode_page",
+        episode_id: "episode2",
+      }
+
+    // post data
+    const postUrl = "https://v1.nocodeapi.com/propofm/airtable/vWKvQMugEcliaMcn?tableName=user_intent_logs&typecast=post"
+
+    const intentHeaders = new Headers();
+    intentHeaders.append("Content-Type", "application/json");
+    const requestOptions = {
+      method: "post",
+      headers: intentHeaders,
+      redirect: "follow",
+      body: JSON.stringify([
+        putDataIntentUnlike
+      ])
+    }
+
+    const res = await fetch(postUrl, requestOptions)
+    const result = await res.json()
+
+    if (res.ok) {
+      router.push("/episode/radiohistory/unlike")
+    }
   }
   
   return (
@@ -105,19 +174,15 @@ export default function EpisodePlay () {
           フィードバックいただけると、もっと興味のあるエピソードをお届けすることができます。
           </p>
           <div className={styles.c_flex_wrap_center}>
-            <div className={`${styles.c_roundBtn_white}`}>
-              <Link href="/episode/radiohistory/unlike">
-                <a className={styles.c_roundBtn_inner}>
-                  <span>イマイチ...</span>
-                </a>
-              </Link>
+            <div className={`${styles.c_roundBtn_white}`} onClick={onClickUnlikeBtn}>
+              <div className={styles.c_roundBtn_inner}>
+                <span>イマイチ...</span>
+              </div>
             </div>
-            <div className={`${styles.c_roundBtn}`}>
-              <Link href="/episode/radiohistory/like">
-                <a className={styles.c_roundBtn_inner}>
-                  <span>スキ！</span>
-                </a>
-              </Link>
+            <div className={`${styles.c_roundBtn}`} onClick={onClickLikeBtn}>
+              <div className={styles.c_roundBtn_inner}>
+                <span>スキ！</span>
+              </div>
             </div>
           </div>
         </div>
