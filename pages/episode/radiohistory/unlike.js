@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import Link from 'next/link'
+import { useState } from 'react'
 import CommonBox4 from '../../../components/commonBox4'
 import styles from '../../../styles/common.module.css'
 import { useForm } from "react-hook-form";
@@ -25,7 +26,11 @@ export default function ListenerInput () {
 
   const router = useRouter();
 
+  const [btnSubmitFlg, setBtnSubmitFlg] = useState(false)
+
   const onSubmit = async (data) => {
+    setBtnSubmitFlg(true)
+
     const putDataIntentMessageLogs = 
       {
         uid: "305",
@@ -54,6 +59,8 @@ export default function ListenerInput () {
 
     if (res.ok) {
       router.push("/episode/radiohistory/feedback")
+    } else {
+      alert('通信エラーが発生しました。しばらく経ってから、再度送信してください。')
     }
   }
 
@@ -86,7 +93,7 @@ export default function ListenerInput () {
                   </a>
                 </Link>
               </div>
-            <div className={`${styles.c_roundBtn} ${styles.align_center_pc} ${styles.m0}`}>
+            <div className={`${styles.c_roundBtn} ${styles.align_center_pc} ${styles.m0}`} disabled={btnSubmitFlg}>
               <div className={styles.c_roundBtn_inner}>
                 <span>回答を送る</span>
                 <img className={styles.ico_right} src="/images/ico_check.svg" />

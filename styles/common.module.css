@@ -201,6 +201,12 @@
   padding: 0 40px;
 }
 
+.c_roundBtn:disabled {
+  opacity: 0.6;
+	cursor: auto;
+	pointer-events: none;
+}
+
 .c_roundBtn .c_roundBtn_inner {
   display: flex;
   justify-content: center;
@@ -234,6 +240,12 @@
   margin: 0 auto;
   transition: .4s;
   padding: 0 40px;
+}
+
+.c_roundBtn_white:disabled {
+  opacity: 0.6;
+  cursor: auto;
+	pointer-events: none;
 }
 
 .c_roundBtn_white .c_roundBtn_inner {

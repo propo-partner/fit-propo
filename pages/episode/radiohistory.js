@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRouter } from "next/router";
 import styles from '../../styles/common.module.css'
 import CommonBox4 from "../../components/commonBox4";
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { DataContext } from '../../components/DataProvider';
 
 
@@ -60,8 +60,11 @@ export default function EpisodePlay () {
     musicCurrentTime = (timeBarX / timeBarWidth * track.duration);
   }
 
+  const [btnSubmitFlg, setBtnSubmitFlg] = useState(false)
+
   // like btn
   const onClickLikeBtn = async () => {
+    setBtnSubmitFlg(true)
     const putDataIntentLike = 
       {
         uid: "305",
@@ -89,11 +92,18 @@ export default function EpisodePlay () {
 
     if (res.ok) {
       router.push("/episode/radiohistory/like")
+    } else {
+      alert('通信エラーが発生しました。しばらく経ってから、再度送信してください。')
     }
   }
   
   // unlike btn
   const onClickUnlikeBtn = async () => {
+    setBtnSubmitFlg(true)
+    // if(!btnSubmitFlg) {
+    //   return
+    // }
+    
     const putDataIntentUnlike = 
       {
         uid: "301",
@@ -121,6 +131,8 @@ export default function EpisodePlay () {
 
     if (res.ok) {
       router.push("/episode/radiohistory/unlike")
+    } else {
+      alert('通信エラーが発生しました。しばらく経ってから、再度送信してください。')
     }
   }
   
@@ -174,16 +186,16 @@ export default function EpisodePlay () {
           フィードバックいただけると、もっと興味のあるエピソードをお届けすることができます。
           </p>
           <div className={styles.c_flex_wrap_center}>
-            <div className={`${styles.c_roundBtn_white}`} onClick={onClickUnlikeBtn}>
+            <button className={`${styles.c_roundBtn_white}`} onClick={onClickUnlikeBtn} disabled={btnSubmitFlg}>
               <div className={styles.c_roundBtn_inner}>
                 <span>イマイチ...</span>
               </div>
-            </div>
-            <div className={`${styles.c_roundBtn}`} onClick={onClickLikeBtn}>
+            </button>
+            <button className={`${styles.c_roundBtn}`} onClick={onClickLikeBtn} disabled={btnSubmitFlg}>
               <div className={styles.c_roundBtn_inner}>
                 <span>スキ！</span>
               </div>
-            </div>
+            </button>
           </div>
         </div>
         <div className={styles.episode_description}>
