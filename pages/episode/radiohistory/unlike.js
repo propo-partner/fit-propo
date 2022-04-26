@@ -25,7 +25,6 @@ export default function ListenerInput () {
   } = useForm();
 
   const router = useRouter();
-
   const [btnSubmitFlg, setBtnSubmitFlg] = useState(false)
 
   const onSubmit = async (data) => {
@@ -93,12 +92,12 @@ export default function ListenerInput () {
                   </a>
                 </Link>
               </div>
-            <div className={`${styles.c_roundBtn} ${styles.align_center_pc} ${styles.m0}`} disabled={btnSubmitFlg}>
+            <div className={`${styles.c_roundBtn} ${styles.align_center_pc} ${styles.m0}`}>
               <div className={styles.c_roundBtn_inner}>
                 <span>回答を送る</span>
                 <img className={styles.ico_right} src="/images/ico_check.svg" />
               </div>
-              <input className={styles.c_submit_btn_hidden} type="submit" value="" />
+              <input className={styles.c_submit_btn_hidden} type="submit" value="" disabled={btnSubmitFlg} />
             </div>
           </div>
           </form>

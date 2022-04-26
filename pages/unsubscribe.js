@@ -5,8 +5,21 @@ import CommonBox4 from '../components/commonBox4'
 import styles from '../styles/common.module.css'
 import { useForm } from "react-hook-form";
 
+// get optout-reasons
+export const getStaticProps = async () => {
+  const url = 'https://v1.nocodeapi.com/propofm/airtable/vWKvQMugEcliaMcn?tableName=optout_reasons'
+  
+  const respons = await fetch(url)
+  const data = await respons.json()
+  const optoutReasons = [...data.records]
+  return { 
+    props: {
+      optoutReasons
+    },
+  }
+}
 
-export default function ListenerInput () {
+export default function ListenerInput ( {optoutReasons} ) {
   const {
     register,
     handleSubmit,
@@ -18,24 +31,14 @@ export default function ListenerInput () {
   } = useForm();
 
   const router = useRouter();
-  const [optoutReasons, setOptoutReasons] = useState([])
+  // const [optoutReasons, setOptoutReasons] = useState([])
   const [btnSubmitFlg, setBtnSubmitFlg] = useState(false)
 
-  // get optout-reasons
-  const url = 'https://v1.nocodeapi.com/propofm/airtable/vWKvQMugEcliaMcn?tableName=optout_reasons'
-  
-  useEffect(() => {
-    (async() => {
-      const respons = await fetch(url)
-      const data = await respons.json()
-      setOptoutReasons([...data.records])
-    })()
-  }, [])
-
-  
   // submit
   const onSubmit = async (data) => {
     setBtnSubmitFlg(true)
+
+    console.log(data.reasons.length)
 
     const putData = 
       {
@@ -44,7 +47,7 @@ export default function ListenerInput () {
         free_message: data.unsubscribeText
       }
 
-    // console.log(putData)
+    console.log(putData)
 
     // post data
     const postUrl = "https://v1.nocodeapi.com/propofm/airtable/vWKvQMugEcliaMcn?tableName=optout_logs&typecast=post"
@@ -66,6 +69,8 @@ export default function ListenerInput () {
 
     if (res.ok) {
       router.push("/unsubscribe-feedback")
+    } else {
+      alert('通信エラーが発生しました。しばらく経ってから、再度送信してください。')
     }
 
   }
