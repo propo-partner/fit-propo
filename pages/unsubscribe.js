@@ -19,6 +19,7 @@ export default function ListenerInput () {
 
   const router = useRouter();
   const [optoutReasons, setOptoutReasons] = useState([])
+  const [btnSubmitFlg, setBtnSubmitFlg] = useState(false)
 
   // get optout-reasons
   const url = 'https://v1.nocodeapi.com/propofm/airtable/vWKvQMugEcliaMcn?tableName=optout_reasons'
@@ -31,16 +32,11 @@ export default function ListenerInput () {
     })()
   }, [])
 
-  // const [freeMessage, setFreeMessage] = useState()
-  // const [reasonsText, setReasonsText] = useState()
   
   // submit
   const onSubmit = async (data) => {
+    setBtnSubmitFlg(true)
 
-    // setReasonsText((data.reasons).join(','))
-    // setFreeMessage(data.unsubscribeText)
-    // console.log(reasonsText)
-    
     const putData = 
       {
         uid: "300",
@@ -127,11 +123,11 @@ export default function ListenerInput () {
                 </div>
               </div>
             <div className={`${styles.c_roundBtn} ${styles.align_center_pc} ${styles.m0}`}>
-              <div className={styles.c_roundBtn_inner}>
+              <div className={styles.c_roundBtn_inner} disabled={btnSubmitFlg}>
                 <span>この内容を送る</span>
                 <img className={styles.ico_right} src="/images/ico_check.svg" />
               </div>
-              <input className={styles.c_submit_btn_hidden} type="submit" value="" />
+              <input className={styles.c_submit_btn_hidden} type="submit" value="" disabled={btnSubmitFlg} />
             </div>
           </div>
         </form>
