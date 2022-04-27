@@ -3,7 +3,8 @@ import '../styles/globals.css'
 import TagManager from 'react-gtm-module'
 import { useEffect } from 'react'
 import { AudioPlayer } from '../components/AudioPlayer'
-import Layout from '../components/Layout'
+import LayoutMain from '../components/LayoutMain'
+import LayoutPlayer from '../components/LayoutPlayer'
 
 const tagManagerArgs = {
   gtmId: 'GTM-PCGKC6C',
@@ -16,12 +17,25 @@ export default function App({ Component, pageProps }) {
     TagManager.initialize(tagManagerArgs);
   }, [])
 
-  return (
-    <DataProvider>
-      <Layout>
-        <Component {...pageProps}>
-        </Component>
-      </Layout>
-    </DataProvider>
-  )
+  switch (pageProps.layout) {
+    case 'withPlayer': {
+      return (
+        <DataProvider>
+          <LayoutPlayer>
+            <Component {...pageProps}>
+            </Component>
+          </LayoutPlayer>
+        </DataProvider>
+      )
+    } default: {
+      return (
+        <DataProvider>
+          <LayoutMain>
+            <Component {...pageProps}>
+            </Component>
+          </LayoutMain>
+        </DataProvider>
+      )
+    }
+  }
 }

@@ -1,8 +1,6 @@
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { useRouter } from "next/router";
-import Link from 'next/link'
 import CommonBox3 from '../../components/commonBox3'
-import Layout from '../../components/Layout'
 import styles from '../../styles/common.module.css'
 import { useForm } from "react-hook-form";
 
@@ -40,7 +38,11 @@ export default function ListenerInput () {
     "内省",
   ]
 
+  const [btnSubmitFlg, setBtnSubmitFlg] = useState(false)
+
   const onSubmit = async (data) => {
+    setBtnSubmitFlg(true)
+
     console.log(data)
     // success
     const url = "https://api.json-generator.com/templates/60TLGKL5wU4k/data?access_token=lk2rn4iwvnw4vobuicawllp6fp4wj1we2n35raua"
@@ -139,7 +141,7 @@ export default function ListenerInput () {
                 <span>この内容を保存する</span>
                 <img className={styles.ico_right} src="/images/ico_check.svg" />
               </a>
-              <input className={styles.c_submit_btn_hidden} type="submit" value="" />
+              <input className={styles.c_submit_btn_hidden} type="submit" value="" disabled={btnSubmitFlg} />
             </div>
         </div>
           </form>

@@ -1,11 +1,17 @@
 import { useRouter } from "next/router";
 import Link from 'next/link'
+import { useState } from 'react'
 import CommonBox4 from '../../../components/commonBox4'
-import Layout from '../../../components/Layout'
 import styles from '../../../styles/common.module.css'
 import { useForm } from "react-hook-form";
-import { AudioPlayer } from "../../../components/AudioPlayer";
 
+export const getStaticProps = async () => {
+  return {
+    props: {
+      layout: 'withPlayer'
+    },
+  }
+}
 
 export default function ListenerInput () {
   const {
@@ -19,22 +25,40 @@ export default function ListenerInput () {
 
   const router = useRouter();
 
+  const [btnSubmitFlg, setBtnSubmitFlg] = useState(false)
+
   const onSubmit = async (data) => {
-    console.log(data)
-    // success
-    const url = "https://api.json-generator.com/templates/60TLGKL5wU4k/data?access_token=lk2rn4iwvnw4vobuicawllp6fp4wj1we2n35raua"
+    setBtnSubmitFlg(true)
+    const putDataIntentMessageLogs = 
+      {
+        uid: "305",
+        episode_id: "episode1",
+        message: data.likeText,
+      }
 
-    const params = {
-      method: 'POST',
-      body: data
+    console.log(putDataIntentMessageLogs)
+
+    // post data
+    const postUrl = "https://v1.nocodeapi.com/propofm/airtable/vWKvQMugEcliaMcn?tableName=intent_massage_logs&typecast=post"
+
+    const intentHeaders = new Headers();
+    intentHeaders.append("Content-Type", "application/json");
+    const requestOptions = {
+      method: "post",
+      headers: intentHeaders,
+      redirect: "follow",
+      body: JSON.stringify([
+        putDataIntentMessageLogs
+      ])
     }
-    console.log(params)
-    const res = await fetch(url, params)
-    const result = await res.json()
-    console.log(result.status);
 
-    if (result.status === 'success') {
+    const res = await fetch(postUrl, requestOptions)
+    const result = await res.json()
+
+    if (res.ok) {
       router.push("/episode/radiohistory/feedback")
+    } else {
+      alert('通信エラーが発生しました。しばらく経ってから、再度送信してください。')
     }
   }
 
@@ -67,19 +91,18 @@ export default function ListenerInput () {
                   </a>
                 </Link>
               </div>
-            <div className={`${styles.c_roundBtn} ${styles.align_center_pc} ${styles.m0}`}>
+            <button className={`${styles.c_roundBtn} ${styles.align_center_pc} ${styles.m0}`} disabled={btnSubmitFlg}>
               <div className={styles.c_roundBtn_inner}>
                 <span>回答を送る</span>
                 <img className={styles.ico_right} src="/images/ico_check.svg" />
               </div>
               <input className={styles.c_submit_btn_hidden} type="submit" value="" />
-            </div>
+            </button>
           </div>
           </form>
       </section>
 
       <CommonBox4 />
-      {/* <AudioPlayer /> */}
     </>
   )
 }

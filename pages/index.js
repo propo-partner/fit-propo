@@ -1,9 +1,44 @@
 import Link from 'next/link'
-// import Layout from '../components/Layout'
 
 export default function Home() {
+
+  // episodes data
+  // const allEpisodeData = [
+  //   {
+  //     id: "s1u9swliszzgo7vg",
+  //     epiNum: "epi511",
+  //     title: "0511_「ルール整備が発展のカギ」オスマン帝国スレイマン1世とウィーン包囲",
+  //   },
+  //   {
+  //     id: "b75r3in3q9x3j97p",
+  //     epiNum: "epi512",
+  //     title: "0512_ユグノー戦争とサンバルテルミの虐殺、和解の場が惨劇と化した恐怖",
+  //   },
+  // ]
+
+  // console.log(allEpisodeData)
+
+
   return (
     <div>
+      {/* <div>
+        <h2>エピソードページへのリンク</h2>
+        <ul>
+          {allEpisodeData.map(({id, title}) => (
+            <li key={id}>
+              <Link href="/episode/[id]" as={`/episode/${id}`}>
+                <a>
+                  <h3>{title}</h3>
+                </a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+      </div>
+      <br></br>
+      <br></br>
+      <br></br> */}
       <div>
         <Link href="/commonForm">
           <a>メールアドレス入力画面へ(共通フッター)</a>
@@ -76,11 +111,6 @@ export default function Home() {
       <br />
       <br />
       <br />
-      <div>
-        <Link href="/signup">
-          <a>B-7_メニューからの遷移時</a>
-        </Link>
-      </div>
     </div>
   )
 }

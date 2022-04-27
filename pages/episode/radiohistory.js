@@ -1,12 +1,23 @@
 import Link from 'next/link'
-import Layout from '../../components/Layout'
+import { useRouter } from "next/router";
 import styles from '../../styles/common.module.css'
 import CommonBox4 from "../../components/commonBox4";
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { DataContext } from '../../components/DataProvider';
-import { AudioPlayer } from '../../components/AudioPlayer';
+
+
+export const getStaticProps = async () => {
+  return {
+    props: {
+      layout: 'withPlayer'
+    },
+  }
+}
+
 
 export default function EpisodePlay () {
+  const router = useRouter();
+
 
   // episode info only
   // const url = 'https://api.json-generator.com/templates/5g-ILyuHM4AL/data?access_token=6a76lvuqp3cwnx944w7p5w2e1mv7v7puos3rn15p'
@@ -14,7 +25,10 @@ export default function EpisodePlay () {
   // program + episode info
   const url = 'https://api.json-generator.com/templates/QgSAkpfZNNRi/data?access_token=6a76lvuqp3cwnx944w7p5w2e1mv7v7puos3rn15p'
   
-  const { track, setTrack, isPlay, setIsPlay} = useContext(DataContext)
+  const { track, setTrack, isPlay, setIsPlay, musicRate, musicTime, timePosition, musicCurrentTime } = useContext(DataContext)
+
+  const { duration } = track;
+
 
   useEffect(() => {
     (async() => {
@@ -24,8 +38,8 @@ export default function EpisodePlay () {
     })()
   }, [])
 
-  console.log('title', track.title);
-  console.log('track', track);
+  // console.log('title', track.title);
+  // console.log('track', track);
 
   const onClickPlay = () => {
     if(isPlay) {
@@ -35,9 +49,96 @@ export default function EpisodePlay () {
     }
   }
 
+  // timebar click
+  const timeBar = useRef(null);
+  let timeBarWidth;
+  let timeBarX;
+
+  const onClickTime = (e) => {
+    timeBarWidth = e.target.getBoundingClientRect().width;
+    timeBarX = e.nativeEvent.offsetX;
+    musicCurrentTime = (timeBarX / timeBarWidth * track.duration);
+  }
+
+  const [btnSubmitFlg, setBtnSubmitFlg] = useState(false)
+
+  // like btn
+  const onClickLikeBtn = async () => {
+    setBtnSubmitFlg(true)
+    const putDataIntentLike = 
+      {
+        uid: "305",
+        intent: "like",
+        context: "episode_page",
+        episode_id: "episode1",
+      }
+
+    // post data
+    const postUrl = "https://v1.nocodeapi.com/propofm/airtable/vWKvQMugEcliaMcn?tableName=user_intent_logs&typecast=post"
+
+    const intentHeaders = new Headers();
+    intentHeaders.append("Content-Type", "application/json");
+    const requestOptions = {
+      method: "post",
+      headers: intentHeaders,
+      redirect: "follow",
+      body: JSON.stringify([
+        putDataIntentLike
+      ])
+    }
+
+    const res = await fetch(postUrl, requestOptions)
+    const result = await res.json()
+
+    if (res.ok) {
+      router.push("/episode/radiohistory/like")
+    } else {
+      alert('通信エラーが発生しました。しばらく経ってから、再度送信してください。')
+    }
+  }
+  
+  // unlike btn
+  const onClickUnlikeBtn = async () => {
+    setBtnSubmitFlg(true)
+    // if(!btnSubmitFlg) {
+    //   return
+    // }
+    
+    const putDataIntentUnlike = 
+      {
+        uid: "301",
+        intent: "unlike",
+        context: "episode_page",
+        episode_id: "episode2",
+      }
+
+    // post data
+    const postUrl = "https://v1.nocodeapi.com/propofm/airtable/vWKvQMugEcliaMcn?tableName=user_intent_logs&typecast=post"
+
+    const intentHeaders = new Headers();
+    intentHeaders.append("Content-Type", "application/json");
+    const requestOptions = {
+      method: "post",
+      headers: intentHeaders,
+      redirect: "follow",
+      body: JSON.stringify([
+        putDataIntentUnlike
+      ])
+    }
+
+    const res = await fetch(postUrl, requestOptions)
+    const result = await res.json()
+
+    if (res.ok) {
+      router.push("/episode/radiohistory/unlike")
+    } else {
+      alert('通信エラーが発生しました。しばらく経ってから、再度送信してください。')
+    }
+  }
+  
   return (
     <>
-      <section>
+      <section className={styles.episode_wrap}>
         <div className={styles.episode_play_sec}>
           <div className={styles.episode_thumbnail}>
             <img src="/images/thumbnail_rect01.png" alt="" />
@@ -46,12 +147,13 @@ export default function EpisodePlay () {
           {isPlay ? (
             <div className={styles.c_roundBtn_inner}>
               <span>停止する</span>
-              <img className={styles.ico_right} src="/images/ico_play.svg" />
+              <span className={` ${["material-icons-outlined"]} ${styles.ico_right}`}>play_circle_outline</span>
+
             </div>
             ) : (
               <div className={styles.c_roundBtn_inner}>
               <span>エピソードを聴く</span>
-              <img className={styles.ico_right} src="/images/ico_play.svg" />
+              <span className={` ${["material-icons-outlined"]} ${styles.ico_right}`}>play_circle_outline</span>
             </div>
             )
           }
@@ -59,20 +161,18 @@ export default function EpisodePlay () {
           <div className={styles.audio_player_wrap}>
             <div className={`${styles.timeber} ${styles.mb16}`}>
               <div className={styles.timebar}>
-                {/* <div onClick={onClickTime} ref={timeBar}> */}
-                <div>
-                  {/* <div id={`${styles["timebar-past"]}`} style={{width: musicRate + '%'}}> */}
-                  <div id={`${styles["timebar-past"]}`} style={{width: '50%'}}>
+                <div onClick={onClickTime} ref={timeBar}>
+                  <div>
+                    <div id={`${styles["timebar-past"]}`} style={{width: musicRate + '%'}}>
+                    </div>
                   </div>
                 </div>
               </div>
               <div className={styles.time_ctl_wrap}>
-                <span id={styles.time_disp}>00:00:00 | 13:46:22
-                  {/* {musicTime(timePosition)}/
-                  {musicTime(duration)} */}
+                <span id={styles.time_disp}>
+                  {musicTime(timePosition)} | {musicTime(duration)}
                 </span>
-                {/* <span id={`${styles["timebar-num"]}`}>{musicRate + '%'}</span> */}
-                <span id={`${styles["timebar-num"]}`}>{'50%'}</span>
+                <span id={`${styles["timebar-num"]}`}>{musicRate + '%'}</span>
               </div>
             </div>
             <h2 className={`${styles.c_title} ${styles.mb12} ${styles.episode_title}`}>{track.title}</h2>
@@ -81,25 +181,21 @@ export default function EpisodePlay () {
           </div>
         </div>
         <div className={`${styles.c_greybox} ${styles.c_question_box} ${styles.mb40}`}>
-          <p className={`${styles.c_title} ${styles.mb12}`}>このエピソードは<br />あなたの興味に合いましたか？</p>
+          <p className={`${styles.c_title} ${styles.mb8}`}>このエピソードは<br />あなたの興味に合いましたか？</p>
           <p className={`${styles.c_text} ${styles.mb16}`}>
           フィードバックいただけると、もっと興味のあるエピソードをお届けすることができます。
           </p>
           <div className={styles.c_flex_wrap_center}>
-            <div className={`${styles.c_roundBtn_white}`}>
-              <Link href="/episode/radiohistory/unlike">
-                <a className={styles.c_roundBtn_inner}>
-                  <span>イマイチ...</span>
-                </a>
-              </Link>
-            </div>
-            <div className={`${styles.c_roundBtn}`}>
-              <Link href="/episode/radiohistory/like">
-                <a className={styles.c_roundBtn_inner}>
-                  <span>スキ！</span>
-                </a>
-              </Link>
-            </div>
+            <button className={`${styles.c_roundBtn_white}`} onClick={onClickUnlikeBtn} disabled={btnSubmitFlg}>
+              <div className={styles.c_roundBtn_inner}>
+                <span>イマイチ...</span>
+              </div>
+            </button>
+            <button className={`${styles.c_roundBtn}`} onClick={onClickLikeBtn} disabled={btnSubmitFlg}>
+              <div className={styles.c_roundBtn_inner}>
+                <span>スキ！</span>
+              </div>
+            </button>
           </div>
         </div>
         <div className={styles.episode_description}>
@@ -125,7 +221,6 @@ export default function EpisodePlay () {
               </div>
               <p className={`${styles.detail} ${styles.c_text}`}>
               {track.description}
-              {/* 『ラジレキ 〜りーとん・そっしーのラジオ歴史小話〜』 〜歴史 × ビジネス × 雑談ネタ × ゆるさ〜 意外な組み合わせを、\&quot;歴史フリーク\&quot; りーとんと、\&quot;頑張るマン\&quot; そっしーの二人が織りなす、ゆるく聞きやすく、時に痛快に展開するポッドキャスト（Podcast）番組。 難しい！と感じる歴史のハナシも、身近なものと組み合わせてくれると思わず誰かとシェアしたくなるから不思議です。 ゆる～く、かるく、やわらかく、皆さんの耳に♪ */}
               </p>
             </div>
           </div>

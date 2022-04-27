@@ -1,48 +1,78 @@
-import React, { useRef } from "react"
+import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router";
 import Link from 'next/link'
-import CommonBox3 from '../components/commonBox3'
-import Layout from '../components/Layout'
+import CommonBox4 from '../components/commonBox4'
 import styles from '../styles/common.module.css'
 import { useForm } from "react-hook-form";
 
+// get optout-reasons
+export const getStaticProps = async () => {
+  const url = 'https://v1.nocodeapi.com/propofm/airtable/vWKvQMugEcliaMcn?tableName=optout_reasons'
+  
+  const respons = await fetch(url)
+  const data = await respons.json()
+  const optoutReasons = [...data.records]
+  return { 
+    props: {
+      optoutReasons
+    },
+  }
+}
 
-export default function ListenerInput () {
+export default function ListenerInput ( {optoutReasons} ) {
   const {
     register,
     handleSubmit,
     watch,
     getValues,
     formState: { errors },
-    defaultValues
+    defaultValues,
+    reset
   } = useForm();
 
   const router = useRouter();
+  // const [optoutReasons, setOptoutReasons] = useState([])
+  const [btnSubmitFlg, setBtnSubmitFlg] = useState(false)
 
-  const reasonLists = [
-    {id: "reason1", reason: "メール配信内容が好みに合わなかった", checked: true},
-    {id: "reason2", reason: "面白いエピソードが出会えなかった", checked: false},
-    {id: "reason3", reason: "メール配信頻度が多い", checked: false},
-    {id: "reason4", reason: "その他", chaeked: false},
-  ]
-
+  // submit
   const onSubmit = async (data) => {
-    console.log(data)
-    // success
-    const url = "https://api.json-generator.com/templates/60TLGKL5wU4k/data?access_token=lk2rn4iwvnw4vobuicawllp6fp4wj1we2n35raua"
+    setBtnSubmitFlg(true)
 
-    const params = {
-      method: 'POST',
-      body: data
-    }
-    console.log(params)
-    const res = await fetch(url, params)
+    console.log(data.reasons.length)
+
+    const putData = 
+      {
+        uid: "300",
+        selected_item: (data.reasons).join(','),
+        free_message: data.unsubscribeText
+      }
+
+    console.log(putData)
+
+    // post data
+    const postUrl = "https://v1.nocodeapi.com/propofm/airtable/vWKvQMugEcliaMcn?tableName=optout_logs&typecast=post"
+
+    const optoutHeaders = new Headers();
+    optoutHeaders.append("Content-Type", "application/json");
+    const requestOptions = {
+      method: "post",
+      headers: optoutHeaders,
+      redirect: "follow",
+      body: JSON.stringify([
+        putData
+      ])
+    };
+    
+    const res = await fetch(postUrl, requestOptions)
     const result = await res.json()
-    console.log(result.status);
+    // console.log("result", result);
 
-    if (result.status === 'success') {
+    if (res.ok) {
       router.push("/unsubscribe-feedback")
+    } else {
+      alert('通信エラーが発生しました。しばらく経ってから、再度送信してください。')
     }
+
   }
 
   return (
@@ -58,22 +88,22 @@ export default function ListenerInput () {
           <p className={`${styles.c_title_16} ${styles.mb16}`}>理由</p>
           <div className={`${styles.flexstart} ${styles.mb40}`}>
 
-            { reasonLists.map((item, index) => {
+            { optoutReasons.map((item, index) => {
               index = index + 1
               return (
                 <div className={styles.c_check_wrap_100} key={`key_${index}`}>
                 <label className={styles.c_label_check}>
                   <input
-                    {...register("test", {
+                    {...register("reasons", {
                     })}
-                    defaultChecked={"メール配信内容が好みに合わなかった".includes(item.reason)}
+                    defaultChecked={"メール配信内容が好みに合わなかった".includes(item.fields.item)}
                     id={item.id}
                     type="checkbox"
-                    value={item.reason}
+                    value={item.fields.item}
                     // name="unsubscribeReason[]"
                     className={styles.c_input_check} 
                     />
-                    {item.reason}
+                    {item.fields.item}
                 </label>
               </div>
               )
@@ -92,23 +122,23 @@ export default function ListenerInput () {
           </div>
 
           <div className={`${styles.c_flex_wrap_center} ${styles.mb24}`}>
-              <div className={`${styles.c_roundBtn_white_small} ${styles.mr12} ${styles.m0}`}>
+              <div className={`${styles.c_roundBtn_white_small} ${styles.mr12} ${styles.m0}`} onClick={() => reset()}>
                 <div className={styles.c_roundBtn_inner}>
                   <span>内容をクリア</span>
                 </div>
               </div>
             <div className={`${styles.c_roundBtn} ${styles.align_center_pc} ${styles.m0}`}>
-              <div className={styles.c_roundBtn_inner}>
+              <div className={styles.c_roundBtn_inner} disabled={btnSubmitFlg}>
                 <span>この内容を送る</span>
                 <img className={styles.ico_right} src="/images/ico_check.svg" />
               </div>
-              <input className={styles.c_submit_btn_hidden} type="submit" value="" />
+              <input className={styles.c_submit_btn_hidden} type="submit" value="" disabled={btnSubmitFlg} />
             </div>
           </div>
         </form>
       </section>
 
-      <CommonBox3 />
+      <CommonBox4 />
     </>
   )
 }

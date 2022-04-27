@@ -7,37 +7,23 @@ import episodeImg from "../public/images/thumbnail_rect01.png";
 
 export const AudioPlayer = () => {
   // track
-  const { track, intervalRef, isPlay, setIsPlay, musicCurrentTime, setMusicCurrentTime } = useContext(DataContext);
+  const { track, intervalRef, isPlay, setIsPlay, musicCurrentTime, setMusicCurrentTime, musicRate, setMusicRate, musicTime, timePosition, setTimePosition } = useContext(DataContext);
 
   const { title, date, duration,  epiNum, src, program } = track;
 
   const musicRef = useRef(null)
   useEffect(() => {
     musicRef.current = new Audio(track.src);
-    console.log('ここ通ったよ')
+    setTimePosition(musicRef.current.currentTime);
+    console.log(timePosition)
   }, [src]);
-  // console.log(musicRef)
 
-  const musicRate = (Math.floor(musicCurrentTime / track.duration * 100));
-  // const musicRate = (Math.floor(musicRef.current.currentTime / track.duration * 100));
-  // const musicRate = 0
-  // console.log(musicRate)
-
-  const [timePosition, setTimePosition] = useState(0); // time position
+  setMusicRate(Math.floor(musicCurrentTime / track.duration * 100));
 
   const speed = [1.0, 1.3, 1.5, 2.0, 0.5, 0.7];
   const [speedIndex, setSpeedIndex] = useState(0);
   const [speedNextIndex, setSpeedNextIndex] = useState(1);
   
-  const musicTime = (time) => {
-    let hour = (Math.floor(time / 60 / 60)).toString().padStart( 2, '0');
-    let minutes = (Math.floor((time / 60) % 60)).toString().padStart( 2, '0');
-    let sec = (Math.floor(time % 60)).toString().padStart( 2, '0');
-    let convertTime;
-    convertTime = hour + ':' + minutes + ':' + sec;
-    return convertTime;
-  }
-
   const start = () => {
     setMusicCurrentTime(musicRef.current.currentTime)
     // console.log('ここ通ったよ')
@@ -49,9 +35,9 @@ export const AudioPlayer = () => {
       if (musicRef.current.ended) {
         console.log('audio ended ');
         setIsPlay(false)
-        // nextTrack();
       } else {
       setTimePosition(musicRef.current.currentTime);
+      setMusicCurrentTime(musicRef.current.currentTime);
       // console.log(' 再生トラック/経過時間 ');
       // console.log('track ' + musicCurrentTime);
       }
@@ -106,9 +92,6 @@ export const AudioPlayer = () => {
   const onClickTime = (e) => {
     timeBarWidth = e.target.getBoundingClientRect().width;
     timeBarX = e.nativeEvent.offsetX;
-    // console.log('timeBarクリック: ' + timeBarX / timeBarWidth * track[trackIndex].duration + '');
-    // console.log(e.target.getBoundingClientRect().width);
-    // console.log(e.nativeEvent.offsetX);
     musicRef.current.currentTime = (timeBarX / timeBarWidth * track.duration);
   }
 
