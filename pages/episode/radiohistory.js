@@ -38,8 +38,8 @@ export default function EpisodePlay () {
     })()
   }, [])
 
-  console.log('title', track.title);
-  console.log('track', track);
+  // console.log('title', track.title);
+  // console.log('track', track);
 
   const onClickPlay = () => {
     if(isPlay) {
